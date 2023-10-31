@@ -1,7 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
+import ProductCarousel from "./components/carousel";
 
 export default function Home() {
+  const products = [
+    { image: "/img/chocolate3.png", name: "Product 1", id: 1 },
+    { image: "/img/chocolate3.png", name: "Product 2", id: 2 },
+    { image: "/img/chocolate3.png", name: "Product 3", id: 3 },
+    { image: "/img/chocolate3.png", name: "Product 4", id: 4 },
+    { image: "/img/chocolate3.png", name: "Product 5", id: 5 },
+  ];
+
   return (
     //The first section with an image of the product, a brief description of it and a purchase button
     <main className="  flex min-h-screen flex-col items-center justify-between bg-background">
@@ -46,7 +55,7 @@ export default function Home() {
         <strong> Why our products?</strong>
       </h1>
       <section className="flex h-96 flex-row justify-center gap-32 bg-background  pb-6   text-citrine">
-        <section className="bg-bacgroundCard flex w-1/5 flex-col items-center rounded-md p-4 text-center">
+        <section className="flex w-1/5 flex-col items-center rounded-md bg-bacgroundCard p-4 text-center">
           <img src="/svg/recipes.svg" className="h-24 w-24"></img>
           <h2 className="pb-5 pt-5 text-5xl">Originality</h2>
           <p className="leading-loose">
@@ -54,7 +63,7 @@ export default function Home() {
             chocolate that provides a unique gastronomic experience.
           </p>
         </section>
-        <section className="bg-bacgroundCard flex w-1/5 flex-col  items-center rounded-md  p-4  text-center">
+        <section className="flex w-1/5 flex-col items-center  rounded-md bg-bacgroundCard  p-4  text-center">
           <img src="/svg/chocolate-bar.svg" className="h-24 w-24"></img>
           <h2 className="pb-5 pt-5 text-5xl">Variety</h2>
           <p className="leading-loose">
@@ -63,7 +72,7 @@ export default function Home() {
             the most refined chocolate connoisseurs.
           </p>
         </section>
-        <section className="bg-bacgroundCard flex w-1/5   flex-col items-center rounded-md p-4 text-center">
+        <section className="flex w-1/5 flex-col items-center rounded-md bg-bacgroundCard p-4 text-center">
           <img src="/svg/leaf-nature-plant.svg" className="h-24 w-24"></img>
           <h2 className="pb-5 pt-5 text-5xl">Natural</h2>
           <p className="leading-loose">
@@ -72,6 +81,12 @@ export default function Home() {
             also care for the health of our consumers.
           </p>
         </section>
+      </section>
+
+      {/* Carousel with display of available products */}
+
+      <section className="h-900px flex items-center">
+        <ProductCarousel product={products} />
       </section>
     </main>
   );
