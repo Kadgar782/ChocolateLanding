@@ -1,39 +1,30 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowBigLeft, ArrowBigRight, Circle, CircleDot } from "lucide-react";
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Scrollbar } from "swiper/modules";
 import "./carousel.css";
-import Image from "next/image";
+import "swiper/css";
+import "swiper/css/scrollbar";
 
-type productData = {
-  product: {
-    image: string;
-    name: string;
-    id: number;
-  }[];
-};
+export interface SingleProduct {
+  image: string;
+  name: string;
+  id: number;
+}
 
-export function ProductCarousel({ product }: productData) {
-  const [imageIndex, setImageIndex] = useState(0);
+export type Products = SingleProduct[];
 
-  function showNextImage() {
-    setImageIndex((index) => {
-      if (index === product.length - 1) return 0;
-      return index + 1;
-    });
-  }
+type Function = { products: Products };
 
-  function showPrevImage() {
-    setImageIndex((index) => {
-      if (index === 0) return product.length - 1;
-      return index - 1;
-    });
-  }
+export function ProductCarousel({ products }: Function) {
+  //if a user visited the site from a phone, then he will have fewer products displayed per page, but there will be more pages
+  const productsPerPage = window.innerWidth >= 768 ? 5 : 2;
 
   return (
     <section
       aria-label="Product Slider"
-      className="relative flex h-max w-max flex-wrap items-center justify-center "
+      className="flex  w-3/4   flex-wrap items-center justify-center max-md:h-full "
     >
       {/* <a
         href="#after-image-slider-controls"
@@ -41,53 +32,46 @@ export function ProductCarousel({ product }: productData) {
       >
         Skip Image Slider Controls
       </a> */}
-      <button
-        onClick={showPrevImage}
-        className="img-slider-btn"
-        style={{ left: 0 }}
-        aria-label="View Previous Product"
-      >
-        <ArrowBigLeft aria-hidden />
-      </button>
-      <div className="w-fill mb-4 flex overflow-hidden">
-        {product.map(({ image, name, id }, index) => (
-          <section className="flex h-1/2 w-1/3 flex-col items-center rounded-md bg-bacgroundCard p-4 text-center">
-            <img
-              key={id}
-              src={image}
-              alt={name}
-              aria-hidden={imageIndex !== index}
-              className="img-slider-img  flex flex-shrink-0 flex-grow-0 transition-transform duration-500 ease-in-out hover:-translate-y-1 "
-              style={{ translate: `${-100 * imageIndex}%` }}
-            />
-          </section>
-        ))}
+      <div className="flex  h-max w-3/4 gap-5 overflow-hidden max-md:mb-4 max-md:h-5/6 max-md:w-full max-md:items-center">
+        <Swiper
+          slidesPerView={productsPerPage}
+          spaceBetween={30}
+          navigation={{
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          }}
+          scrollbar={{
+            draggable: true,
+            hide: true,
+          }}
+          modules={[Navigation, Scrollbar]}
+        >
+          {products.map(({ image, name, id }, index) => (
+            <SwiperSlide>
+              <section
+                className=" img-slider-card flex h-max flex-1 flex-col items-center rounded-md bg-bacgroundCard  p-4 text-center "
+                key={id}
+              >
+                <img
+                  key={id}
+                  src={image}
+                  alt={name}
+                  // aria-hidden={page !== index}
+                  className="img-slider-img  flex h-auto max-h-[164px] max-w-full flex-shrink-0 flex-grow-0 hover:-translate-y-1 lg:max-h-[222px]"
+                />
+                <h1 className="img-slider-text">{name}</h1>
+              </section>
+            </SwiperSlide>
+          ))}
+          <button className="swiper-button-next">
+            <ArrowBigRight size={32} z={1} />
+          </button>
+          <button className="swiper-button-prev">
+            <ArrowBigLeft size={32} z={1} />
+          </button>
+        </Swiper>
       </div>
 
-      <button
-        onClick={showNextImage}
-        className="img-slider-btn"
-        style={{ right: 0 }}
-        aria-label="View Next Product"
-      >
-        <ArrowBigRight aria-hidden />
-      </button>
-      <div className="dot-buttons m-0 flex w-full items-center justify-center">
-        {product.map((_, index) => (
-          <button
-            key={index}
-            className="img-slider-dot-btn  items-center"
-            aria-label={`View Image ${index + 1}`}
-            onClick={() => setImageIndex(index)}
-          >
-            {index === imageIndex ? (
-              <CircleDot aria-hidden />
-            ) : (
-              <Circle aria-hidden />
-            )}
-          </button>
-        ))}
-      </div>
       <div id="after-image-slider-controls" />
     </section>
   );
