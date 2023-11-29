@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ProductCarousel from "./components/carousel";
 import { Products } from "./components/carousel";
+import { StarIcon } from "./components/star";
 import "./page.css";
 
 export default function Home() {
@@ -103,19 +104,19 @@ export default function Home() {
 
       <section className="bento  w-4/5">
         <section className="grid grid-flow-row-dense  grid-cols-6 content-center justify-center gap-4   max-md:grid-cols-1 max-md:grid-rows-1 ">
-          <div className="col-span-4  flex min-h-[20rem] flex-col place-content-center rounded bg-primary pb-20 pt-20 text-5xl font-bold text-background">
+          <div className="col-span-4  flex min-h-[20rem] flex-col place-content-center rounded bg-primary pb-20 pt-20 text-5xl font-bold text-background max-md:pl-12">
             <h1 className=" flex place-content-center">
               More than 200K sales annually
             </h1>
-            <h2 className=" flex place-content-center text-2xl">
+            <h2 className=" flex place-content-center text-2xl max-md:pr-12 max-md:pt-5">
               and counting...
             </h2>
           </div>
-          <div className="col-span-2 flex min-h-[20rem] flex-col place-content-center rounded bg-secondary pb-20 pt-20 text-4xl font-bold text-text max-md:col-span-4 ">
+          <div className="col-span-2 flex min-h-[20rem] flex-col place-content-center rounded bg-secondary pb-20 pt-20 text-4xl font-bold text-text max-md:col-span-4  max-md:pl-12 ">
             <h1 className="flex place-content-center content-center">
               100% Natural Ingredients!
             </h1>
-            <h2 className=" flex place-content-center text-xl">
+            <h2 className=" flex place-content-center text-xl  max-md:pr-7  max-md:pt-5">
               we care about your health
             </h2>
           </div>
@@ -143,6 +144,114 @@ export default function Home() {
               You can leave your own or watch others
             </Link>
           </div>
+        </section>
+      </section>
+      {/* section with customer reviews */}
+
+      <section className="flex w-4/5 flex-col items-center">
+        <h1 className="flex  pt-32  text-5xl text-text max-md:text-4xl">
+          <strong>Testimonials</strong>
+        </h1>
+        <h2 className="flex  pb-5 pt-8 text-2xl font-normal text-text max-md:text-xl">
+          What people are saying about this product.
+        </h2>
+
+        {/* it is necessary to make a component out of this */}
+
+        <section className="flex h-96 flex-row justify-center gap-32  bg-background   pb-6 text-citrine max-md:h-full max-md:flex-col  max-md:items-center max-md:gap-3 ">
+          <section className="flex w-1/3 flex-col items-center rounded-md bg-bacgroundCard p-4 text-center max-md:w-4/5">
+            <div className="reviever flex w-full flex-row items-center gap-5 p-5 pb-1 ">
+              <div className="h-20 w-20 rounded-full border-2 border-citrine bg-primary"></div>
+              <div>
+                <h2 className=" text-xl">Original User</h2>
+                <span className=" opacity-50">Product Owner</span>
+              </div>
+            </div>
+            <div className="flex-start flex self-start pl-4">
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+            </div>
+
+            <p className="leading-loose">
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+              vitae scelerisque urna. Duis in ligula.
+            </p>
+          </section>
+          <section className="flex w-1/3 flex-col items-center rounded-md bg-bacgroundCard p-4 text-center max-md:w-4/5">
+            <div className="reviever flex w-full flex-row items-center gap-5 p-5 pb-1 ">
+              <div className="h-20 w-20 rounded-full border-2 border-citrine bg-secondary"></div>
+              <div>
+                <h2 className=" text-xl">Not Original User</h2>
+                <span className=" opacity-50">Product Owner</span>
+              </div>
+            </div>
+            <div className="flex-start flex self-start pl-4">
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+            </div>
+
+            <p className="leading-loose">
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+              vitae scelerisque urna. Duis in ligula.
+            </p>
+          </section>
+          <section className="flex w-1/3 flex-col items-center rounded-md bg-bacgroundCard p-4 text-center max-md:w-4/5">
+            <div className="reviever flex w-full flex-row items-center gap-5 p-5 pb-1 ">
+              <div className="h-20 w-20 rounded-full border-2 border-citrine bg-accent"></div>
+              <div>
+                <h2 className=" text-xl">Least Original User</h2>
+                <span className=" opacity-50">Product Owner</span>
+              </div>
+            </div>
+            <div className="flex-start flex self-start pl-4">
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+              <StarIcon
+                rewriteClass={"h-10 w-full fill-accent stroke-accent"}
+              />
+            </div>
+
+            <p className="leading-loose">
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+              vitae scelerisque urna. Duis in ligula.
+            </p>
+          </section>
         </section>
       </section>
     </main>
