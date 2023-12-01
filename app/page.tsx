@@ -1,11 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
 import ProductCarousel from "./components/carousel";
 import { Products } from "./components/carousel";
 import { Review } from "./components/mainReviews";
 import { Bento } from "./components/mainBento";
 import { FirstLook } from "./components/mainFirstLook";
 import { Features } from "./components/features";
+import { FAQ } from "./components/FAQSection";
 import "./page.css";
 
 export default function Home() {
@@ -56,6 +55,9 @@ export default function Home() {
         </h2>
         <Review />
       </section>
+
+      {/* Frequently asked questions section */}
+      <FAQ />
     </main>
   );
 }
