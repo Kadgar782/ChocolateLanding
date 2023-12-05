@@ -17,7 +17,7 @@ const config: Config = {
     colors: {
       text: "#ebe066",
       background: "#623527",
-      bacgroundCard: "#673b2e",
+      backgroundCard: "#673b2e",
       primary: "#327486",
       secondary: "#240800",
       accent: "#439eb6",

@@ -8,7 +8,7 @@ export const FAQ = () => {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse malesuada lacus ex, sit amet blandit leo loborti seget.";
 
   return (
-    <section className="flex w-4/5 flex-row justify-around gap-4 pt-36 ">
+    <section className="flex w-4/5 flex-row justify-around gap-4 pb-36 pt-28 ">
       <section className="flex flex-col text-text">
         <h1 className="pb-10 text-5xl">
           <strong>FAQ</strong>
