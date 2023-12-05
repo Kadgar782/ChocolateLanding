@@ -55,7 +55,7 @@ export default function Home() {
       <FAQ />
 
       {/* offer to register on the site for a discount on the first purchase */}
-      <section className="bg-backgroundCard mb-20 flex min-h-[300px] w-2/4 flex-col items-center justify-center pb-20">
+      <section className="bg-backgroundCard m-20 flex min-h-[300px] w-2/4 flex-col items-center justify-center pb-20">
         <h1 className="text-5xl text-text">
           <strong>But that not ALL!</strong>
         </h1>
@@ -69,9 +69,9 @@ export default function Home() {
         <Link
           className="flex h-16 items-center rounded-md bg-secondary  px-2 pl-2 pr-4  text-right text-text"
           target="_blank"
-          href="/shop"
+          href="/registration"
         >
-          <strong>ORDER ONLINE</strong>
+          <strong>Registration</strong>
         </Link>
       </section>
     </main>
