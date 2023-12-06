@@ -55,11 +55,11 @@ export default function Home() {
       <FAQ />
 
       {/* offer to register on the site for a discount on the first purchase */}
-      <section className="bg-backgroundCard m-20 flex min-h-[300px] w-2/4 flex-col items-center justify-center pb-20">
-        <h1 className="text-5xl text-text">
+      <section className="m-20 flex min-h-[300px] w-2/4 flex-col items-center justify-center rounded bg-backgroundCard pb-20  max-md:w-3/4">
+        <h1 className="text-5xl text-text max-md:pl-5">
           <strong>But that not ALL!</strong>
         </h1>
-        <h2 className="pb-10 pt-3 text-3xl text-text">
+        <h2 className="pb-10 pt-3 text-3xl text-text  max-md:pl-5">
           Register now and get a&nbsp;
           <span className="text-accent">
             <strong>10%</strong>

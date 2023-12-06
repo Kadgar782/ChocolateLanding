@@ -26,7 +26,7 @@ export const Bento = () => {
           </h1>
           <Link
             target="_blank"
-            className="link flex place-content-center text-xl"
+            className="link flex place-content-center text-xl underline decoration-double decoration-2 underline-offset-8 hover:-translate-y-1"
             href="/"
           >
             Check if your county available
@@ -39,7 +39,7 @@ export const Bento = () => {
           <Link
             href="/"
             target="_blank"
-            className="link flex place-content-center text-xl"
+            className="link flex place-content-center text-xl underline decoration-double decoration-2 underline-offset-8 hover:-translate-y-1 max-md:pl-3"
           >
             You can leave your own or watch others
           </Link>
