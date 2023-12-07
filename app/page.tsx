@@ -33,7 +33,7 @@ export default function Home() {
       </h1>
       <Features />
       {/* Carousel with display of available products */}
-      <h1 className="flex  pt-32  text-5xl text-text max-md:text-4xl">
+      <h1 className="flex  pt-32  text-5xl text-text max-md:pl-2 max-md:text-4xl">
         <strong>Take a look at our most popular products</strong>
       </h1>
       <section className="flex h-[32rem] w-full  items-center justify-center">
