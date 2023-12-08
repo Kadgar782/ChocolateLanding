@@ -49,7 +49,7 @@ export function ProductCarousel({ products }: Function) {
           {products.map(({ image, name, id }, index) => (
             <SwiperSlide>
               <section
-                className=" img-slider-card bg-backgroundCard flex h-max flex-1 flex-col items-center rounded-md  p-4 text-center "
+                className=" img-slider-card flex h-max flex-1 flex-col items-center rounded-md bg-backgroundCard  p-4 text-center "
                 key={id}
               >
                 <img
@@ -59,7 +59,7 @@ export function ProductCarousel({ products }: Function) {
                   // aria-hidden={page !== index}
                   className="img-slider-img  flex h-auto max-h-[164px] max-w-full flex-shrink-0 flex-grow-0 hover:-translate-y-1 lg:max-h-[222px]"
                 />
-                <h1 className="img-slider-text">{name}</h1>
+                <h1 className="img-slider-text text-text">{name}</h1>
               </section>
             </SwiperSlide>
           ))}

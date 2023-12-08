@@ -10,16 +10,16 @@ import Link from "next/link";
 
 export default function Home() {
   const products: Products = [
-    { image: "/img/chocolate3.png", name: "Product 1", id: 1 },
-    { image: "/img/chocolate3.png", name: "Product 2", id: 2 },
-    { image: "/img/chocolate3.png", name: "Product 3", id: 3 },
-    { image: "/img/chocolate3.png", name: "Product 4", id: 4 },
-    { image: "/img/chocolate3.png", name: "Product 5", id: 5 },
-    { image: "/img/chocolate3.png", name: "Product 6", id: 6 },
-    { image: "/img/chocolate3.png", name: "Product 7", id: 7 },
-    { image: "/img/chocolate3.png", name: "Product 8", id: 8 },
-    { image: "/img/chocolate3.png", name: "Product 9", id: 9 },
-    { image: "/img/chocolate3.png", name: "Product 10", id: 10 },
+    { image: "/img/brown.png", name: "Nullam vitae ", id: 1 },
+    { image: "/img/violet.png", name: "Cras sed", id: 2 },
+    { image: "/img/blue.png", name: "Pellentesque cursus", id: 3 },
+    { image: "/img/brown.png", name: "Etiam pulvinar", id: 1 },
+    { image: "/img/violet.png", name: "Sed auctor", id: 2 },
+    { image: "/img/blue.png", name: "Aenean finibus", id: 3 },
+    { image: "/img/brown.png", name: "Curabitur vestibulum", id: 1 },
+    { image: "/img/violet.png", name: "Duis vestibulum", id: 2 },
+    { image: "/img/blue.png", name: "Suspendisse", id: 3 },
+    { image: "/img/brown.png", name: "Aliquam fermentum", id: 10 },
   ];
 
   return (
@@ -28,9 +28,13 @@ export default function Home() {
       <FirstLook />
       {/* The beginning of the second section with three blocks why is this product
       so great */}
-      <h1 className="flex pb-20  text-5xl text-text max-md:pb-4 max-md:text-4xl">
+      <h1 className="z-0  pb-20 text-5xl text-text max-md:pb-4 max-md:text-4xl">
         <strong> Why our products?</strong>
       </h1>
+      {/* //div with background image */}
+
+      <div className="absolute  top-[43rem] z-10 h-3/4 w-full bg-[url('/img/hazelnutReal.png')]  bg-15% bg-left-top bg-no-repeat "></div>
+
       <Features />
       {/* Carousel with display of available products */}
       <h1 className="flex  pt-32  text-5xl text-text max-md:pl-2 max-md:text-4xl">
