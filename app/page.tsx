@@ -5,8 +5,8 @@ import { Bento } from "./components/mainBento";
 import { FirstLook } from "./components/mainFirstLook";
 import { Features } from "./components/features";
 import { FAQ } from "./components/FAQSection";
+import { RegistrationCall } from "./components/callToRegistration";
 import "./page.css";
-import Link from "next/link";
 
 export default function Home() {
   const products: Products = [
@@ -59,25 +59,7 @@ export default function Home() {
       <FAQ />
 
       {/* offer to register on the site for a discount on the first purchase */}
-      <section className="m-20 flex min-h-[300px] w-2/4 flex-col items-center justify-center rounded bg-backgroundCard pb-20  max-md:w-3/4">
-        <h1 className="text-5xl text-text max-md:pl-5">
-          <strong>But that not ALL!</strong>
-        </h1>
-        <h2 className="pb-10 pt-3 text-3xl text-text  max-md:pl-5">
-          Register now and get a&nbsp;
-          <span className="text-accent">
-            <strong>10%</strong>
-          </span>
-          &nbsp; discount on your first order!
-        </h2>
-        <Link
-          className="flex h-16 items-center rounded-md bg-secondary  px-2 pl-2 pr-4  text-right text-text"
-          target="_blank"
-          href="/registration"
-        >
-          <strong>Registration</strong>
-        </Link>
-      </section>
+      <RegistrationCall />
     </main>
   );
 }
