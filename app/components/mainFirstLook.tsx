@@ -31,7 +31,7 @@ export const FirstLook = () => {
       </div>
       <Image
         src="/singleUpscale.png"
-        className="relative ml-0 mr-20 flex flex-row self-center max-md:hidden"
+        className="relative ml-0 mr-20 flex h-auto w-auto flex-row self-center max-md:hidden"
         alt="Chocolate Bar Logo"
         width={580}
         height={440}

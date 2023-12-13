@@ -13,12 +13,12 @@ export default function Home() {
     { image: "/img/brown.png", name: "Nullam vitae ", id: 1 },
     { image: "/img/violet.png", name: "Cras sed", id: 2 },
     { image: "/img/blue.png", name: "Pellentesque cursus", id: 3 },
-    { image: "/img/brown.png", name: "Etiam pulvinar", id: 1 },
-    { image: "/img/violet.png", name: "Sed auctor", id: 2 },
-    { image: "/img/blue.png", name: "Aenean finibus", id: 3 },
-    { image: "/img/brown.png", name: "Curabitur vestibulum", id: 1 },
-    { image: "/img/violet.png", name: "Duis vestibulum", id: 2 },
-    { image: "/img/blue.png", name: "Suspendisse", id: 3 },
+    { image: "/img/brown.png", name: "Etiam pulvinar", id: 4 },
+    { image: "/img/violet.png", name: "Sed auctor", id: 5 },
+    { image: "/img/blue.png", name: "Aenean finibus", id: 6 },
+    { image: "/img/brown.png", name: "Curabitur vestibulum", id: 7 },
+    { image: "/img/violet.png", name: "Duis vestibulum", id: 8 },
+    { image: "/img/blue.png", name: "Suspendisse", id: 9 },
     { image: "/img/brown.png", name: "Aliquam fermentum", id: 10 },
   ];
 
@@ -33,7 +33,7 @@ export default function Home() {
       </h1>
       {/* //div with background image */}
 
-      <div className="absolute  top-[43rem] z-10 h-3/4 w-full bg-[url('/img/hazelnutReal.png')]  bg-15% bg-left-top bg-no-repeat "></div>
+      <div className="absolute  top-[43rem] z-10 h-3/4 w-full bg-[url('/img/hazelnutReal.png')]  bg-15% bg-left-top bg-no-repeat max-md:hidden "></div>
 
       <Features />
       {/* Carousel with display of available products */}

@@ -1,5 +1,5 @@
 "use client";
-import "./details.css";
+import "./css/details.css";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import { ChevronUp } from "lucide-react";
 import React from "react";
@@ -23,7 +23,7 @@ export const CustomAccordion = ({
 
   return (
     <Accordion
-      className="relative mb-8 box-border  cursor-pointer rounded-md bg-bacgroundCard text-text"
+      className="bg-bacgroundCard relative mb-8  box-border cursor-pointer rounded-md text-text"
       sx={{ backgroundColor: "#623527", boxShadow: 0 }}
       onChange={handleAccordionChange}
       expanded={isOpen}
