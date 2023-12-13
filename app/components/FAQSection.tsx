@@ -1,5 +1,5 @@
 "use client";
-import "./details.css";
+import "./css/details.css";
 import React from "react";
 import { CustomAccordion } from "./accordion";
 
