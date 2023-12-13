@@ -10,16 +10,16 @@ import "./page.css";
 
 export default function Home() {
   const products: Products = [
-    { image: "/img/brown.png", name: "Nullam vitae ", id: 1 },
-    { image: "/img/violet.png", name: "Cras sed", id: 2 },
-    { image: "/img/blue.png", name: "Pellentesque cursus", id: 3 },
-    { image: "/img/brown.png", name: "Etiam pulvinar", id: 4 },
-    { image: "/img/violet.png", name: "Sed auctor", id: 5 },
-    { image: "/img/blue.png", name: "Aenean finibus", id: 6 },
-    { image: "/img/brown.png", name: "Curabitur vestibulum", id: 7 },
-    { image: "/img/violet.png", name: "Duis vestibulum", id: 8 },
-    { image: "/img/blue.png", name: "Suspendisse", id: 9 },
-    { image: "/img/brown.png", name: "Aliquam fermentum", id: 10 },
+    { image: "/img/Brown.png", name: "Nullam vitae ", id: 1 },
+    { image: "/img/Violet.png", name: "Cras sed", id: 2 },
+    { image: "/img/Blue.png", name: "Pellentesque cursus", id: 3 },
+    { image: "/img/Brown.png", name: "Etiam pulvinar", id: 4 },
+    { image: "/img/Violet.png", name: "Sed auctor", id: 5 },
+    { image: "/img/Blue.png", name: "Aenean finibus", id: 6 },
+    { image: "/img/Brown.png", name: "Curabitur vestibulum", id: 7 },
+    { image: "/img/Violet.png", name: "Duis vestibulum", id: 8 },
+    { image: "/img/Blue.png", name: "Suspendisse", id: 9 },
+    { image: "/img/Brown.png", name: "Aliquam fermentum", id: 10 },
   ];
 
   return (
