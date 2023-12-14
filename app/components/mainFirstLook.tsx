@@ -16,13 +16,13 @@ export const FirstLook = () => {
         </p>
         <div className=" flex flex-row  items-center ">
           <Link
-            className="flex h-16 items-center rounded-md bg-accent  px-2 pl-2 pr-4  text-right text-text"
+            className="flex h-16 items-center justify-center rounded-md bg-accent  px-2 pl-2 pr-4  text-center text-text"
             target="_blank"
             href="/shop"
           >
             <strong>ORDER ONLINE</strong>
           </Link>
-          <div className="flex pl-4 text-right text-text">
+          <div className="flex pl-4 text-left text-text">
             <strong>
               More than 10,000 people have already ordered from us online!
             </strong>
@@ -30,7 +30,7 @@ export const FirstLook = () => {
         </div>
       </div>
       <Image
-        src="/singleUpscale.png"
+        src="/img/mainProduct.png"
         className="relative ml-0 mr-20 flex h-auto w-auto flex-row self-center max-md:hidden"
         alt="Chocolate Bar Logo"
         width={580}
