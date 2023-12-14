@@ -12,6 +12,7 @@ const config: Config = {
       cover: "cover",
       contain: "contain",
       "15%": "15%",
+      "10%": "10%",
       "50%": "50%",
       "16": "4rem",
     },

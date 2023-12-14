@@ -33,11 +33,11 @@ export default function Home() {
       </h1>
       {/* //div with background image */}
 
-      <div className="absolute  top-[43rem] z-10 h-3/4 w-full bg-[url('/img/hazelnutReal.png')]  bg-15% bg-left-top bg-no-repeat max-md:hidden "></div>
+      <div className="absolute top-[43rem] z-10 h-3/4 w-full  bg-[url('/img/hazelnutReal.png')] bg-15% bg-left-top bg-no-repeat max-md:hidden "></div>
 
       <Features />
       {/* Carousel with display of available products */}
-      <h1 className="flex  pt-32  text-5xl text-text max-md:pl-2 max-md:text-4xl">
+      <h1 className="flex  pt-32  text-5xl text-text max-lg:text-4xl max-md:pl-2">
         <strong>Take a look at our most popular products</strong>
       </h1>
       <section className="flex h-[32rem] w-full  items-center justify-center">

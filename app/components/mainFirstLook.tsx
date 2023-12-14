@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export const FirstLook = () => {
   return (
-    <section className="flex flex-row  bg-[url('/img/beansReal.png')] bg-15% bg-right-top bg-no-repeat p-24 max-md:flex-col max-md:bg-none max-md:p-0">
-      <div className="self-up relative flex flex-col  pl-56 pr-40 pt-20 max-md:p-10">
+    <section className="flex flex-row  bg-[url('/img/beansReal.png')] bg-15% bg-right-top bg-no-repeat p-24 max-[1300px]:pr-0 max-lg:p-16 max-md:flex-col max-md:bg-none max-md:p-0">
+      <div className="self-up relative flex flex-col  pl-56 pr-40 pt-20 max-[1300px]:pl-5 max-xl:pr-0 max-lg:pl-10 max-lg:pr-0 max-md:p-10">
         <h1 className="pb-8  text-5xl text-text ">
           <strong>Sweet Gastronomic Journey to the Center of Asia</strong>
         </h1>
@@ -31,7 +31,7 @@ export const FirstLook = () => {
       </div>
       <Image
         src="/img/mainProduct.png"
-        className="relative ml-0 mr-20 flex h-auto w-auto flex-row self-center max-md:hidden"
+        className=" ml-0 mr-20 flex h-full min-h-[600px] w-full min-w-[500px] flex-row self-center max-xl:mr-0 max-xl:mt-10 max-xl:min-h-[400px] max-xl:min-w-[300px] max-lg:mr-0 max-md:hidden"
         alt="Chocolate Bar Logo"
         width={580}
         height={440}

@@ -2,10 +2,10 @@ import Link from "next/link";
 export const RegistrationCall = () => {
   return (
     <section className="m-20 flex min-h-[300px] w-2/4 flex-col items-center justify-center rounded bg-backgroundCard max-md:w-3/4">
-      <h1 className="text-5xl text-text max-md:pl-5">
+      <h1 className="text-5xl text-text max-[1030px]:text-4xl max-md:pl-5">
         <strong>But that not ALL!</strong>
       </h1>
-      <h2 className="pb-10 pt-3 text-3xl text-text  max-md:pl-5">
+      <h2 className="pb-10 pt-3 text-3xl text-text  max-[1650px]:pl-5 max-[1650px]:pr-5 max-2xl:text-2xl max-lg:pl-5">
         Register now and get a&nbsp;
         <span className="text-accent">
           <strong>10%</strong>

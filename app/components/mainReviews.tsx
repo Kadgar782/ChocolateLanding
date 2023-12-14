@@ -2,8 +2,8 @@ import { StarIcon } from "./star";
 
 export const Review = () => {
   return (
-    <section className="flex h-96 flex-row justify-center gap-32  bg-background   pb-6 text-citrine max-md:h-full max-md:flex-col  max-md:items-center max-md:gap-3 ">
-      <section className="flex w-1/3 flex-col items-center rounded-md bg-backgroundCard p-4 text-center max-md:w-4/5">
+    <section className="flex h-96 flex-row justify-center gap-32  bg-background   pb-6 text-citrine max-lg:h-full max-lg:flex-col  max-lg:items-center max-lg:gap-16 max-md:gap-3 ">
+      <section className="flex w-1/3 flex-col items-center rounded-md bg-backgroundCard p-4 text-center max-lg:w-1/2 max-md:w-4/5">
         <div className="reviever flex w-full flex-row items-center gap-5 p-5 pb-1 ">
           <div className="h-20 w-20 rounded-full border-2 border-citrine bg-primary"></div>
           <div>
@@ -24,7 +24,7 @@ export const Review = () => {
           scelerisque urna. Duis in ligula.
         </p>
       </section>
-      <section className="flex w-1/3 flex-col items-center rounded-md bg-backgroundCard p-4 text-center max-md:w-4/5">
+      <section className="flex w-1/3 flex-col items-center rounded-md bg-backgroundCard p-4 text-center max-lg:w-1/2  max-md:w-4/5">
         <div className="reviever flex w-full flex-row items-center gap-5 p-5 pb-1 ">
           <div className="h-20 w-20 rounded-full border-2 border-citrine bg-secondary"></div>
           <div>
@@ -45,7 +45,7 @@ export const Review = () => {
           scelerisque urna. Duis in ligula.
         </p>
       </section>
-      <section className="flex w-1/3 flex-col items-center rounded-md bg-backgroundCard p-4 text-center max-md:w-4/5">
+      <section className="flex w-1/3 flex-col items-center rounded-md bg-backgroundCard p-4 text-center max-lg:w-1/2  max-md:w-4/5">
         <div className="reviever flex w-full flex-row items-center gap-5 p-5 pb-1 ">
           <div className="h-20 w-20 rounded-full border-2 border-citrine bg-accent"></div>
           <div>
