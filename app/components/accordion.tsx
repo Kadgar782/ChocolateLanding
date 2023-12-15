@@ -24,12 +24,12 @@ export const CustomAccordion = ({
   return (
     <Accordion
       className="bg-bacgroundCard relative mb-8  box-border cursor-pointer rounded-md text-text"
-      sx={{ backgroundColor: "#623527", boxShadow: 0 }}
+      sx={{ backgroundColor: "#45190c", boxShadow: 0 }}
       onChange={handleAccordionChange}
       expanded={isOpen}
     >
       <AccordionSummary
-        expandIcon={<ChevronUp stroke="#439eb6" />}
+        expandIcon={<ChevronUp stroke="#bca66e" />}
         aria-controls="panel1a-content"
         id="panel1a-header"
         sx={{

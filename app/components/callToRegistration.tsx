@@ -1,7 +1,7 @@
 import Link from "next/link";
 export const RegistrationCall = () => {
   return (
-    <section className="m-20 flex min-h-[300px] w-2/4 flex-col items-center justify-center rounded bg-backgroundCard max-md:w-3/4">
+    <section className="m-20 flex min-h-[300px] w-2/4 flex-col items-center justify-center rounded bg-primary max-md:w-3/4">
       <h1 className="text-5xl text-text max-[1030px]:text-4xl max-md:pl-5">
         <strong>But that not ALL!</strong>
       </h1>

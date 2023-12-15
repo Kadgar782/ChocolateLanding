@@ -55,7 +55,7 @@ export function ProductCarousel({ products }: Function) {
           {products.map(({ image, name, id }, index) => (
             <SwiperSlide key={id}>
               <section
-                className=" img-slider-card flex h-max flex-1 flex-col items-center rounded-md bg-backgroundCard  p-4 text-center "
+                className=" img-slider-card flex h-max flex-1 flex-col items-center rounded-md bg-primary  p-4 text-center "
                 key={id}
               >
                 <img
