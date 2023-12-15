@@ -3,7 +3,7 @@ export const Features = () => {
     <section className="z-0 flex h-96 flex-row  justify-center gap-32 bg-background pb-6 text-citrine max-lg:h-full max-lg:flex-col max-lg:items-center  max-lg:gap-16 max-md:h-full max-md:flex-col max-md:items-center max-md:gap-3">
       <section className="flex w-1/5  flex-col items-center rounded-md bg-backgroundCard p-4 text-center   max-[1580px]:min-h-[420px]   max-xl:min-h-[500px] max-lg:min-h-full max-lg:w-4/5">
         <img
-          src="/svg/recipes.svg"
+          src="/svg/book.svg"
           className="h-24 w-24  max-lg:h-12 max-lg:w-12"
         ></img>
         <h2 className="pb-5 pt-5 text-5xl max-lg:text-4xl">Novelty</h2>

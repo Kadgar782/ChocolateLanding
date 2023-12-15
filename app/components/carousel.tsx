@@ -49,6 +49,7 @@ export function ProductCarousel({ products }: Function) {
             draggable: true,
             hide: true,
           }}
+          loop={true}
           modules={[Navigation, Scrollbar]}
         >
           {products.map(({ image, name, id }, index) => (
