@@ -1,6 +1,10 @@
 "use client";
-import "./css/details.css";
-import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+} from "@material-tailwind/react";
+
 import { ChevronUp } from "lucide-react";
 import React from "react";
 import { useState } from "react";
@@ -23,36 +27,18 @@ export const CustomAccordion = ({
 
   return (
     <Accordion
-      className="bg-bacgroundCard relative mb-8  box-border cursor-pointer rounded-md text-text"
-      sx={{ backgroundColor: "#45190c", boxShadow: 0 }}
-      onChange={handleAccordionChange}
-      expanded={isOpen}
+      open={isOpen}
+      className=" relative mb-8 box-border cursor-pointer rounded-lg border border-secondary bg-secondary bg-clip-border px-1 text-text"
     >
-      <AccordionSummary
-        expandIcon={<ChevronUp stroke="#bca66e" />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-        sx={{
-          backgroundColor: "#240800",
-          borderTopLeftRadius: "10px",
-          borderTopRightRadius: "10px",
-          //if the accordion is open, the borderRadius will be removed from the bottom of the Summary
-
-          borderBottomLeftRadius: isOpen ? 0 : "10px",
-          borderBottomRightRadius: isOpen ? 0 : "10px",
-        }}
+      <AccordionHeader
+        className=" bg-secondary pb-3 pl-3 pt-3 text-2xl"
+        onClick={() => handleAccordionChange()}
       >
-        <h1 className="text-2xl text-text ">{accordionName}</h1>
-      </AccordionSummary>
-      <AccordionDetails
-        sx={{
-          backgroundColor: "#240800",
-          borderBottomLeftRadius: "10px",
-          borderBottomRightRadius: "10px",
-        }}
-      >
-        <p className="bg-secondary text-lg text-text">{accordionContent}</p>
-      </AccordionDetails>
+        {accordionName}
+      </AccordionHeader>
+      <AccordionBody className="bg-secondary pb-3 pl-3 pt-3 text-xl">
+        {accordionContent}
+      </AccordionBody>
     </Accordion>
   );
 };

@@ -4,7 +4,7 @@ export const Bento = () => {
   return (
     <section className="bento  w-4/5">
       <section className="grid grid-flow-row-dense  grid-cols-6 content-center justify-center gap-4   max-xl:grid-cols-1 max-xl:grid-rows-1 ">
-        <div className="bg-bento  col-span-4 flex min-h-[20rem] flex-col place-content-center rounded pb-20 pt-20 text-5xl font-bold text-background max-xl:pl-12">
+        <div className="col-span-4  flex min-h-[20rem] flex-col place-content-center rounded bg-bento pb-20 pt-20 text-5xl font-bold text-background max-xl:pl-12">
           <h1 className=" flex place-content-center max-[1380px]:text-4xl">
             More than 200K sales annually
           </h1>
@@ -43,7 +43,7 @@ export const Bento = () => {
             className="link flex flex-col place-content-center items-center text-xl max-xl:text-base"
           >
             You can leave your own or watch others
-            <span className="bottom-0 left-0 flex min-h-[3px] w-3/5 origin-bottom-right transform place-self-center bg-background duration-100 ease-in-out hover:scale-y-150 max-xl:w-4/5 max-xl:text-base"></span>
+            <span className="bottom-0 left-0 flex min-h-[3px] w-3/5 origin-bottom-right transform place-self-center bg-text duration-100 ease-in-out hover:scale-y-150 max-xl:w-4/5 max-xl:text-base"></span>
           </Link>
         </div>
       </section>

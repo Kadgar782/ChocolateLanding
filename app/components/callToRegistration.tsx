@@ -10,7 +10,7 @@ export const RegistrationCall = () => {
         <span className="text-accent">
           <strong>10%</strong>
         </span>
-        &nbsp; discount on your first order!
+        &nbsp;discount on your first order!
       </h2>
       <Link
         className="flex h-16 items-center rounded-md bg-secondary  px-2 pl-2 pr-4  text-right text-text"
