@@ -20,17 +20,10 @@ const config: Config = {
       text: "#bca66e",
       textAlt: "#928581",
       background: "#45190c",
-      backgroundCard: "#43190b",
       bento: "#ddcea0",
       primary: "#4d2413",
       secondary: "#240800",
       accent: "#2E3966",
-      citrine: "#EBE066",
-      bluencs: "#0976E3",
-      cornellred: "#BF211E",
-      brown: "#653527",
-      black: "#000000",
-      white: "#f5f5f5",
     },
     extend: {
       backgroundImage: {

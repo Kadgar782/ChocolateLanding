@@ -4,8 +4,6 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
-
-import { ChevronUp } from "lucide-react";
 import React from "react";
 import { useState } from "react";
 
