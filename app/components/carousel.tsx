@@ -3,23 +3,17 @@
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar } from "swiper/modules";
+import { selectProducts } from "../../lib/features/productsSlice";
+import { useSelector } from "react-redux";
 import "./css/carousel.css";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import { useEffect, useState } from "react";
 
-export interface SingleProduct {
-  image: string;
-  name: string;
-  id: number;
-}
-
-export type Products = SingleProduct[];
-
-type Function = { products: Products };
-
-export function ProductCarousel({ products }: Function) {
+export function ProductCarousel() {
   const [productsPerPage, setProductsPerPage] = useState<number>(5);
+
+  const products = useSelector(selectProducts);
   useEffect(() => {
     //if a user visited the site from a phone, then he will have fewer products displayed per page, but there will be more pages
     const productsPerPage = window.innerWidth >= 768 ? 5 : 2;
@@ -52,7 +46,7 @@ export function ProductCarousel({ products }: Function) {
           loop={true}
           modules={[Navigation, Scrollbar]}
         >
-          {products.map(({ image, name, id }, index) => (
+          {products.products.map(({ image, name, id }, index) => (
             <SwiperSlide key={id}>
               <section
                 className=" img-slider-card flex h-max flex-1 flex-col items-center rounded-md bg-primary  p-4 text-center "

@@ -1,27 +1,14 @@
 import ProductCarousel from "./components/carousel";
-import { Products } from "./components/carousel";
 import { Review } from "./components/mainReviews";
 import { Bento } from "./components/mainBento";
 import { FirstLook } from "./components/mainFirstLook";
 import { Features } from "./components/features";
 import { FAQ } from "./components/FAQSection";
 import { RegistrationCall } from "./components/callToRegistration";
+
 import "./page.css";
 
 export default function Home() {
-  const products: Products = [
-    { image: "/img/Brown.png", name: "Nullam vitae ", id: 1 },
-    { image: "/img/Violet.png", name: "Cras sed", id: 2 },
-    { image: "/img/Blue.png", name: "Pellentesque cursus", id: 3 },
-    { image: "/img/Brown.png", name: "Etiam pulvinar", id: 4 },
-    { image: "/img/Violet.png", name: "Sed auctor", id: 5 },
-    { image: "/img/Blue.png", name: "Aenean finibus", id: 6 },
-    { image: "/img/Brown.png", name: "Curabitur vestibulum", id: 7 },
-    { image: "/img/Violet.png", name: "Duis vestibulum", id: 8 },
-    { image: "/img/Blue.png", name: "Suspendisse", id: 9 },
-    { image: "/img/Brown.png", name: "Aliquam fermentum", id: 10 },
-  ];
-
   return (
     //The first section with an image of the product, a brief description of it and a purchase button
     <main className=" flex min-h-screen w-full flex-col items-center justify-between bg-background ">
@@ -41,7 +28,7 @@ export default function Home() {
         <strong>Take a look at our most popular products</strong>
       </h1>
       <section className="flex h-[32rem] w-full  items-center justify-center">
-        <ProductCarousel products={products} />
+        <ProductCarousel />
       </section>
       {/* Blocks with statistics and brand history*/}
       <Bento />
