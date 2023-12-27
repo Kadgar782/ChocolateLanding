@@ -12,7 +12,7 @@ export interface SingleProduct {
 export type Products = SingleProduct[];
 
 // Define a type for the slice state
-interface ProductsState {
+export interface ProductsState {
   products: Products;
 }
 
