@@ -27,13 +27,13 @@ export default function Home() {
   ) => {
     const checked = event.target.checked;
     const category = event.target.name;
-
-    setCategoryFilters(
-      (prevFilters) =>
-        checked
-          ? [...prevFilters, category] // Add if checked
-          : prevFilters.filter((filter) => filter !== category), // Remove if unchecked
-    );
+    console.log(categoryFilters),
+      setCategoryFilters(
+        (prevFilters) =>
+          checked
+            ? [...prevFilters, category] // Add if checked
+            : prevFilters.filter((filter) => filter !== category), // Remove if unchecked
+      );
   };
 
   const productsList = products.products;
@@ -47,25 +47,27 @@ export default function Home() {
   return (
     <section className="wholePage flex min-h-screen w-full justify-end bg-background">
       <aside className="mt-10 flex w-1/5 border p-5">
-        <section className=" filters flex w-4/5 justify-start rounded-md border bg-primary">
+        <section className=" filters flex w-4/5 flex-col justify-start rounded-md border bg-primary">
           {/* categories to filter */}
           <h1 className="pl-5 pt-5 text-3xl text-text">Filters</h1>
+          <h2 className="pl-5 pt-5 text-2xl text-text">Color</h2>
           <Card>
             <List>
               {categories.map((elm, index) => {
                 return (
-                  <ListItem className="p-0" key={index}>
+                  <ListItem key={index} className="p-0">
                     <label
-                      htmlFor="vertical-list-react ${index}"
+                      htmlFor={elm}
                       className="flex w-full cursor-pointer items-center px-3 py-2"
                     >
                       <ListItemPrefix className="mr-3">
                         <Checkbox
-                          id="${index}"
+                          id={elm}
                           ripple={false}
                           crossOrigin=""
+                          key={index}
                           name={elm}
-                          className="hover:before:opacity-0"
+                          className=" flex flex-row bg-secondary hover:scale-105  hover:before:opacity-0"
                           onChange={handleCategoryFilterChange}
                           containerProps={{
                             className: "p-0",
