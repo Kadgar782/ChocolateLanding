@@ -7,6 +7,9 @@ export interface SingleProduct {
   name: string;
   id: number;
   categories: string;
+  totalSold: number;
+  price: number;
+  quantityOnStock: number;
 }
 
 export type Products = SingleProduct[];
@@ -24,60 +27,90 @@ const initialState: ProductsState = {
       name: "Nullam vitae ",
       id: 1,
       categories: "brown",
+      totalSold: 1000,
+      price: 10,
+      quantityOnStock: 10430,
     },
     {
       image: "/img/Violet.png",
       name: "Cras sed",
       id: 2,
       categories: "violet",
+      totalSold: 10000,
+      price: 8,
+      quantityOnStock: 104320,
     },
     {
       image: "/img/Blue.png",
       name: "Pellentesque cursus",
       id: 3,
       categories: "blue",
+      totalSold: 100,
+      price: 3,
+      quantityOnStock: 10300,
     },
     {
       image: "/img/Brown.png",
       name: "Etiam pulvinar",
       id: 4,
       categories: "brown",
+      totalSold: 500,
+      price: 4,
+      quantityOnStock: 100,
     },
     {
       image: "/img/Violet.png",
       name: "Sed auctor",
       id: 5,
       categories: "violet",
+      totalSold: 3000,
+      price: 5,
+      quantityOnStock: 105500,
     },
     {
       image: "/img/Blue.png",
       name: "Aenean finibus",
       id: 6,
       categories: "blue",
+      totalSold: 433000,
+      price: 5,
+      quantityOnStock: 1030,
     },
     {
       image: "/img/Brown.png",
       name: "Curabitur vestibulum",
       id: 7,
       categories: "brown",
+      totalSold: 104320,
+      price: 6,
+      quantityOnStock: 100,
     },
     {
       image: "/img/Violet.png",
       name: "Duis vestibulum",
       id: 8,
       categories: "violet",
+      totalSold: 13000,
+      price: 7,
+      quantityOnStock: 100,
     },
     {
       image: "/img/Blue.png",
       name: "Suspendisse",
       id: 9,
       categories: "blue",
+      totalSold: 10400,
+      price: 8,
+      quantityOnStock: 14000,
     },
     {
       image: "/img/Brown.png",
       name: "Aliquam fermentum",
       id: 10,
       categories: "brown",
+      totalSold: 10100,
+      price: 13,
+      quantityOnStock: 1040,
     },
   ],
 };

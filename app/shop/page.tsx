@@ -8,20 +8,25 @@ import {
   ListItem,
   ListItemPrefix,
   Typography,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 import { useAppSelector } from "../../lib/hooks";
-import { selectProducts } from "../../lib/features/productsSlice";
+import {
+  SingleProduct,
+  selectProducts,
+} from "../../lib/features/productsSlice";
 
 export default function Home() {
-  const [filteredBy, setFilteredBy] = useState<string>("popularity");
+  const [sortedBy, setSortedBy] = useState<string>("By popularity");
   const [query, setQuery] = useState<string>("");
+  const [categoryFilters, setCategoryFilters] = useState<string[]>([]);
 
   const categories: string[] = ["blue", "violet", "brown"];
 
-  const [categoryFilters, setCategoryFilters] = useState<string[]>([]);
-
   const products = useAppSelector(selectProducts);
-
+  const productsList = products.products;
+  // the part with filters
   const handleCategoryFilterChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -36,18 +41,43 @@ export default function Home() {
       );
   };
 
-  const productsList = products.products;
-
   const filteredProducts =
     categoryFilters.length > 0
       ? productsList.filter((product) =>
           categoryFilters.find((el) => el === product.categories),
         )
       : productsList;
+
+  // the part with sorting
+  const sortedProducts = filteredProducts.toSorted((a, b) => {
+    if (sortedBy == "By popularity") {
+      return b.totalSold - a.totalSold;
+    } // Descending popularity
+    else if (sortedBy == "By price: low-high") {
+      return a.price - b.price;
+    } // Ascending price
+    else sortedBy == "By price: high-low";
+    {
+      return b.price - a.price;
+    } // Ascending price "By price: high-low":
+  });
+
+  // const sortedProducts2 = filteredProducts.toSorted((a, b) => {
+  //   switch (sortedBy) {
+  //     case "By popularity":
+  //       return b.totalSold - a.totalSold; // Descending popularity
+  //     case "By price: low-high":
+  //       return a.price - b.price; // Ascending price
+  //     case "By price: high-low":
+  //       return b.price - a.price; // Descending price
+  //     default:
+  //       return filteredProducts; // No sorting
+  //   }
+  // });
   return (
-    <section className="wholePage flex min-h-screen w-full justify-end bg-background">
-      <aside className="mt-10 flex w-1/5 border p-5">
-        <section className=" filters flex w-4/5 flex-col justify-start rounded-md border bg-primary">
+    <section className="wholePage flex min-h-screen w-full  justify-end bg-background">
+      <div className="flex w-4/5 ">
+        <aside className="filters mt-7 flex w-1/6 flex-col justify-start rounded-md  border-2 border-text  bg-primary p-5 pl-0">
           {/* categories to filter */}
           <h1 className="pl-5 pt-5 text-3xl text-text">Filters</h1>
           <h2 className="pl-5 pt-5 text-2xl text-text">Color</h2>
@@ -74,7 +104,7 @@ export default function Home() {
                           }}
                         />
                       </ListItemPrefix>
-                      <Typography color="blue-gray" className="font-medium">
+                      <Typography className="font-medium text-text">
                         {elm}
                       </Typography>
                     </label>
@@ -83,25 +113,42 @@ export default function Home() {
               })}
             </List>
           </Card>
-        </section>
-      </aside>
-      <div className="flex w-3/4 flex-col items-center ">
-        <section className="products ml-10 flex w-3/4 flex-row flex-wrap justify-center border pt-10">
-          {filteredProducts.map(({ image, name, id }) => (
-            <section
-              className=" img-slider-card max-h-auto m-7 flex w-1/4  flex-col items-center rounded-md  bg-primary p-4 text-center "
-              key={id}
+        </aside>
+        <div className="flex w-3/5 flex-col items-center">
+          <div className="m-4 mt-7 flex w-11/12 justify-between self-start rounded-md border-2 border-text bg-primary p-2">
+            <h1 className=" flex text-text">
+              Result {filteredProducts.length}
+            </h1>
+            <select
+              id="sort-select"
+              value={sortedBy}
+              className="flex w-1/6 justify-end bg-primary text-text"
+              onChange={(e) => setSortedBy(e.target.value)}
             >
-              <img
+              <option value="By popularity"> By popularity </option>
+              <option value="By price: low-high"> By price: low-high </option>
+              <option value="By price: high-low"> By price: high-low </option>
+            </select>
+          </div>
+          <section className="products flex w-full flex-row flex-wrap justify-start self-start pt-10">
+            {sortedProducts.map(({ image, name, id, price, totalSold }) => (
+              <section
+                className=" img-slider-card max-h-auto m-7 flex w-1/4 flex-col items-center  rounded-md border-t-2 border-text  bg-primary p-4 text-center "
                 key={id}
-                src={image}
-                alt={name}
-                className="img-slider-img  flex h-auto max-h-[164px] max-w-full flex-shrink-0 flex-grow-0 hover:-translate-y-1 lg:max-h-[222px]"
-              />
-              <h1 className="img-slider-text text-text">{name}</h1>
-            </section>
-          ))}
-        </section>
+              >
+                <img
+                  key={id}
+                  src={image}
+                  alt={name}
+                  className="img-slider-img  flex h-auto max-h-[164px] max-w-full flex-shrink-0 flex-grow-0 hover:-translate-y-1 lg:max-h-[222px]"
+                />
+                <h1 className="img-slider-text text-text">{price}$</h1>
+                <h1 className="img-slider-text text-text">{totalSold} sold</h1>
+                <h2 className="img-slider-text text-text">{name}</h2>
+              </section>
+            ))}
+          </section>
+        </div>
       </div>
     </section>
   );
