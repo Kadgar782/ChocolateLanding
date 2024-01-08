@@ -32,13 +32,12 @@ export default function Home() {
   ) => {
     const checked = event.target.checked;
     const category = event.target.name;
-    console.log(categoryFilters),
-      setCategoryFilters(
-        (prevFilters) =>
-          checked
-            ? [...prevFilters, category] // Add if checked
-            : prevFilters.filter((filter) => filter !== category), // Remove if unchecked
-      );
+    setCategoryFilters(
+      (prevFilters) =>
+        checked
+          ? [...prevFilters, category] // Add if checked
+          : prevFilters.filter((filter) => filter !== category), // Remove if unchecked
+    );
   };
 
   const filteredProducts =
@@ -48,32 +47,19 @@ export default function Home() {
         )
       : productsList;
 
-  // the part with sorting
+  // // the part with sorting
   const sortedProducts = filteredProducts.toSorted((a, b) => {
-    if (sortedBy == "By popularity") {
-      return b.totalSold - a.totalSold;
-    } // Descending popularity
-    else if (sortedBy == "By price: low-high") {
-      return a.price - b.price;
-    } // Ascending price
-    else sortedBy == "By price: high-low";
-    {
-      return b.price - a.price;
-    } // Ascending price "By price: high-low":
+    switch (sortedBy) {
+      case "By popularity":
+        return b.totalSold - a.totalSold; // Descending popularity
+      case "By price: low-high":
+        return a.price - b.price; // Ascending price
+      case "By price: high-low":
+        return b.price - a.price; // Descending price
+      default:
+        return 0; // No sorting
+    }
   });
-
-  // const sortedProducts2 = filteredProducts.toSorted((a, b) => {
-  //   switch (sortedBy) {
-  //     case "By popularity":
-  //       return b.totalSold - a.totalSold; // Descending popularity
-  //     case "By price: low-high":
-  //       return a.price - b.price; // Ascending price
-  //     case "By price: high-low":
-  //       return b.price - a.price; // Descending price
-  //     default:
-  //       return filteredProducts; // No sorting
-  //   }
-  // });
   return (
     <section className="wholePage flex min-h-screen w-full  justify-end bg-background">
       <div className="flex w-4/5 ">

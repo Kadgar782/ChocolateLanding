@@ -26,24 +26,27 @@ export const Bento = () => {
           </h1>
           <Link
             target="_blank"
-            className="link flex flex-col place-content-center items-center text-xl max-xl:text-base"
+            className="group block place-content-center items-center self-center text-xl transition duration-300 max-xl:text-base"
             href="/"
           >
             Check if your county available
-            <span className="bottom-0 left-0 flex min-h-[3px] w-2/5 origin-bottom-right transform place-self-center bg-background duration-100 ease-in-out hover:scale-y-150 max-xl:w-4/5"></span>
+            <span className=" flex h-full max-h-[3px]  w-full  origin-bottom scale-y-50 bg-background transition-all duration-500 group-hover:max-h-[10px]  group-hover:scale-y-100"></span>
           </Link>
         </div>
         <div className="col-span-3 flex max-h-[4rem] min-h-[2rem] flex-col place-content-center rounded bg-primary pb-20 pt-20 text-3xl font-bold  text-text max-xl:col-span-4">
-          <h1 className="flex place-content-center content-center">
-            100 K+ reviews
+          <h1
+            id="reviews-link"
+            className="flex place-content-center content-center"
+          >
+            100K+ reviews
           </h1>
           <Link
             href="/"
             target="_blank"
-            className="link flex flex-col place-content-center items-center text-xl max-xl:text-base"
+            className="group block place-content-center items-center self-center text-xl transition duration-300 max-xl:text-base"
           >
             You can leave your own or watch others
-            <span className="bottom-0 left-0 flex min-h-[3px] w-3/5 origin-bottom-right transform place-self-center bg-text duration-100 ease-in-out hover:scale-y-150 max-xl:w-4/5 max-xl:text-base"></span>
+            <span className=" flex h-full max-h-[3px]  w-full  origin-bottom scale-y-50 bg-text transition-all duration-500 group-hover:max-h-[10px]  group-hover:scale-y-100"></span>
           </Link>
         </div>
       </section>
