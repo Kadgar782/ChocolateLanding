@@ -1,38 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Checkbox,
-  Card,
-  List,
-  ListItem,
-  ListItemPrefix,
-  Typography,
-  Select,
-  Option,
-} from "@material-tailwind/react";
 import { useAppSelector } from "../../lib/hooks";
-import {
-  SingleProduct,
-  selectProducts,
-} from "../../lib/features/productsSlice";
+import { selectProducts } from "../../lib/features/productsSlice";
+import { ListOfParametrs } from "@/components/filterList";
 
 export default function Home() {
   const [sortedBy, setSortedBy] = useState<string>("By popularity");
   const [query, setQuery] = useState<string>("");
-  const [categoryFilters, setCategoryFilters] = useState<string[]>([]);
+  const [typeFilters, setTypeFilters] = useState<string[]>([]);
+  const [colorFilters, setColorFilters] = useState<string[]>([]);
 
   const categories: string[] = ["blue", "violet", "brown"];
+  const schocoladeType: string[] = ["dark", "white", "milk"];
 
   const products = useAppSelector(selectProducts);
   const productsList = products.products;
-  // the part with filters
-  const handleCategoryFilterChange = (
+  // the part with handlers for each type of product
+  const handleTypeFilterChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const checked = event.target.checked;
     const category = event.target.name;
-    setCategoryFilters(
+    setTypeFilters(
       (prevFilters) =>
         checked
           ? [...prevFilters, category] // Add if checked
@@ -40,14 +30,40 @@ export default function Home() {
     );
   };
 
-  const filteredProducts =
-    categoryFilters.length > 0
-      ? productsList.filter((product) =>
-          categoryFilters.find((el) => el === product.categories),
-        )
-      : productsList;
+  const handleColorFilterChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const checked = event.target.checked;
+    const category = event.target.name;
+    setColorFilters(
+      (prevFilters) =>
+        checked
+          ? [...prevFilters, category] // Add if checked
+          : prevFilters.filter((filter) => filter !== category), // Remove if unchecked
+    );
+  };
+
+  // all filters applied together
+
+  const filteredProducts = productsList.filter((product) => {
+    // Check if the product's type matches any selected type filter
+    const typeMatch =
+      typeFilters.length === 0 ||
+      typeFilters.some((filter) => filter === product.type);
+    console.log(typeMatch);
+
+    // Check if the product's color matches any selected color filter,
+    // but only if there are active color filters
+    const colorMatch =
+      colorFilters.length === 0 ||
+      colorFilters.some((filter) => filter === product.typeColor);
+    console.log(colorMatch);
+
+    return typeMatch && colorMatch;
+  });
 
   // // the part with sorting
+
   const sortedProducts = filteredProducts.toSorted((a, b) => {
     switch (sortedBy) {
       case "By popularity":
@@ -66,39 +82,18 @@ export default function Home() {
         <aside className="filters mt-7 flex w-1/6 flex-col justify-start rounded-md  border-2 border-text  bg-primary p-5 pl-0">
           {/* categories to filter */}
           <h1 className="pl-5 pt-5 text-3xl text-text">Filters</h1>
+
           <h2 className="pl-5 pt-5 text-2xl text-text">Color</h2>
-          <Card>
-            <List>
-              {categories.map((elm, index) => {
-                return (
-                  <ListItem key={index} className="p-0">
-                    <label
-                      htmlFor={elm}
-                      className="flex w-full cursor-pointer items-center px-3 py-2"
-                    >
-                      <ListItemPrefix className="mr-3">
-                        <Checkbox
-                          id={elm}
-                          ripple={false}
-                          crossOrigin=""
-                          key={index}
-                          name={elm}
-                          className=" flex flex-row bg-secondary hover:scale-105  hover:before:opacity-0"
-                          onChange={handleCategoryFilterChange}
-                          containerProps={{
-                            className: "p-0",
-                          }}
-                        />
-                      </ListItemPrefix>
-                      <Typography className="font-medium text-text">
-                        {elm}
-                      </Typography>
-                    </label>
-                  </ListItem>
-                );
-              })}
-            </List>
-          </Card>
+          <ListOfParametrs
+            categories={categories}
+            handleCategoryFilterChange={handleColorFilterChange}
+          />
+
+          <h2 className="pl-5 pt-5 text-2xl text-text">Type</h2>
+          <ListOfParametrs
+            categories={schocoladeType}
+            handleCategoryFilterChange={handleTypeFilterChange}
+          />
         </aside>
         <div className="flex w-3/5 flex-col items-center">
           <div className="m-4 mt-7 flex w-11/12 justify-between self-start rounded-md border-2 border-text bg-primary p-2">
