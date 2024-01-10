@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
+import { Slider } from "@material-tailwind/react";
 import { useAppSelector } from "../../lib/hooks";
 import { selectProducts } from "../../lib/features/productsSlice";
 import { ListOfParametrs } from "@/components/filterList";
+import { Dispatch } from "@reduxjs/toolkit";
 
 export default function Home() {
   const [sortedBy, setSortedBy] = useState<string>("By popularity");
@@ -62,6 +64,41 @@ export default function Home() {
     return typeMatch && colorMatch;
   });
 
+  // functions and variables for price filtering
+  const prices = filteredProducts.map((products) => products.price);
+  const minPrice = Math.min(...prices);
+  const maxPrice = Math.max(...prices);
+
+  const [inputValueMin, setInputValueMin] = useState(minPrice);
+  const [inputValueMax, setInputValueMax] = useState(maxPrice);
+
+  const minPriceString = minPrice.toString();
+  const maxPriceString = maxPrice.toString();
+
+  //  must try to make it more universal and think over some possible points
+
+  const handleMaxInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseFloat(event.target.value);
+    if (newValue > maxPrice) {
+      setInputValueMax(maxPrice);
+    } else if (newValue < inputValueMin) {
+      setInputValueMax(inputValueMin);
+    } else {
+      setInputValueMax(newValue);
+    }
+  };
+
+  const handleMinInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseFloat(event.target.value);
+    if (newValue < minPrice) {
+      setInputValueMin(minPrice);
+    } else if (newValue > inputValueMax) {
+      setInputValueMin(inputValueMax);
+    } else {
+      setInputValueMin(newValue);
+    }
+  };
+
   // // the part with sorting
 
   const sortedProducts = filteredProducts.toSorted((a, b) => {
@@ -83,6 +120,33 @@ export default function Home() {
           {/* categories to filter */}
           <h1 className="pl-5 pt-5 text-3xl text-text">Filters</h1>
 
+          <h2 className="pl-5 pt-5 text-2xl text-text"> Price</h2>
+
+          <div className="flex w-full flex-row justify-between space-x-2 pl-2">
+            <div className="flex w-1/2 items-center justify-between ">
+              <input
+                type="number"
+                id="minPrice"
+                min={minPrice}
+                value={inputValueMin}
+                onChange={handleMinInputChange}
+                className="w-full  rounded-md border border-text bg-background px-3 py-2 text-text focus:outline-none sm:text-sm"
+                placeholder={minPriceString}
+              />
+            </div>
+
+            <div className="flex w-1/2 items-center justify-between">
+              <input
+                type="number"
+                id="maxPrice"
+                max={maxPrice}
+                onChange={handleMaxInputChange}
+                className=" w-full rounded-md  border border-text bg-background px-3 py-2 text-text focus:outline-none sm:text-sm"
+                value={inputValueMax}
+                placeholder={maxPriceString}
+              />
+            </div>
+          </div>
           <h2 className="pl-5 pt-5 text-2xl text-text">Color</h2>
           <ListOfParametrs
             categories={categories}

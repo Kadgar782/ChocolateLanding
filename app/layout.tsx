@@ -20,17 +20,17 @@ export default function RootLayout({
     <StoreProvider>
       <html lang="en">
         <body className={inter.className}>
-          <section className="flex h-14 flex-row content-center ">
-            <nav className="flex grow flex-row bg-accent text-text ">
-              <div className="Logo w-1/3"></div>
+          <section className="flex h-14 flex-row content-center max-md:h-20 ">
+            <nav className="flex grow flex-row bg-accent text-text max-md:flex-col-reverse">
+              <div className="Logo w-1/3 max-md:w-1/5"></div>
               {/* it will be necessary to add redux */}
-              <div className="searchBar flex min-h-[40px] w-1/3 content-center justify-center self-center rounded-lg border-2 border-text bg-primary  ">
+              <div className="searchBar flex min-h-[40px] w-1/3 content-center justify-center self-center rounded-lg border-2 border-text bg-primary max-md:w-full ">
                 <input
                   placeholder="Search"
                   className="w-full rounded-lg border-text  bg-primary pl-2 text-text"
                 />
               </div>
-              <div className=" button-group flex w-1/3  items-center justify-end">
+              <div className=" button-group ml-14 flex  w-1/3 items-center justify-end max-md:justify-center max-md:self-center max-md:pb-2">
                 <Link className="pr-8" href="/">
                   HOME
                 </Link>
