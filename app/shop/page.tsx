@@ -1,20 +1,25 @@
 "use client";
 
 import { SetStateAction, useState } from "react";
-import { Slider } from "@material-tailwind/react";
+import {
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+  Drawer,
+  IconButton,
+} from "@material-tailwind/react";
 import { useAppSelector } from "../../lib/hooks";
 import { selectProducts } from "../../lib/features/productsSlice";
-import { ListOfParametrs } from "@/components/filterList";
-import { Dispatch } from "@reduxjs/toolkit";
+import { SlidersHorizontal } from "lucide-react";
+import { FilterShop } from "@/components/shopFilter";
 
 export default function Home() {
   const [sortedBy, setSortedBy] = useState<string>("By popularity");
   const [query, setQuery] = useState<string>("");
   const [typeFilters, setTypeFilters] = useState<string[]>([]);
   const [colorFilters, setColorFilters] = useState<string[]>([]);
-
-  const categories: string[] = ["blue", "violet", "brown"];
-  const schocoladeType: string[] = ["dark", "white", "milk"];
+  const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
 
   const products = useAppSelector(selectProducts);
   const productsList = products.products;
@@ -44,7 +49,9 @@ export default function Home() {
           : prevFilters.filter((filter) => filter !== category), // Remove if unchecked
     );
   };
-
+  console.log(dialogIsOpen);
+  //open Drawer
+  const handleDialogOpen = () => setDialogIsOpen(!dialogIsOpen);
   // all filters applied together
 
   const filteredProducts = productsList.filter((product) => {
@@ -52,52 +59,15 @@ export default function Home() {
     const typeMatch =
       typeFilters.length === 0 ||
       typeFilters.some((filter) => filter === product.type);
-    console.log(typeMatch);
 
     // Check if the product's color matches any selected color filter,
     // but only if there are active color filters
     const colorMatch =
       colorFilters.length === 0 ||
       colorFilters.some((filter) => filter === product.typeColor);
-    console.log(colorMatch);
 
     return typeMatch && colorMatch;
   });
-
-  // functions and variables for price filtering
-  const prices = filteredProducts.map((products) => products.price);
-  const minPrice = Math.min(...prices);
-  const maxPrice = Math.max(...prices);
-
-  const [inputValueMin, setInputValueMin] = useState(minPrice);
-  const [inputValueMax, setInputValueMax] = useState(maxPrice);
-
-  const minPriceString = minPrice.toString();
-  const maxPriceString = maxPrice.toString();
-
-  //  must try to make it more universal and think over some possible points
-
-  const handleMaxInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseFloat(event.target.value);
-    if (newValue > maxPrice) {
-      setInputValueMax(maxPrice);
-    } else if (newValue < inputValueMin) {
-      setInputValueMax(inputValueMin);
-    } else {
-      setInputValueMax(newValue);
-    }
-  };
-
-  const handleMinInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseFloat(event.target.value);
-    if (newValue < minPrice) {
-      setInputValueMin(minPrice);
-    } else if (newValue > inputValueMax) {
-      setInputValueMin(inputValueMax);
-    } else {
-      setInputValueMin(newValue);
-    }
-  };
 
   // // the part with sorting
 
@@ -115,70 +85,65 @@ export default function Home() {
   });
   return (
     <section className="wholePage flex min-h-screen w-full  justify-end bg-background">
-      <div className="flex w-4/5 ">
-        <aside className="filters mt-7 flex w-1/6 flex-col justify-start rounded-md  border-2 border-text  bg-primary p-5 pl-0">
+      <div className="flex w-4/5 max-[1399px]:w-full ">
+        <aside className="filters mt-7 flex w-1/6 flex-col justify-start rounded-md  border-2 border-text  bg-primary p-5 pl-0 max-[1399px]:ml-10 max-lg:hidden">
           {/* categories to filter */}
-          <h1 className="pl-5 pt-5 text-3xl text-text">Filters</h1>
-
-          <h2 className="pl-5 pt-5 text-2xl text-text"> Price</h2>
-
-          <div className="flex w-full flex-row justify-between space-x-2 pl-2">
-            <div className="flex w-1/2 items-center justify-between ">
-              <input
-                type="number"
-                id="minPrice"
-                min={minPrice}
-                value={inputValueMin}
-                onChange={handleMinInputChange}
-                className="w-full  rounded-md border border-text bg-background px-3 py-2 text-text focus:outline-none sm:text-sm"
-                placeholder={minPriceString}
-              />
-            </div>
-
-            <div className="flex w-1/2 items-center justify-between">
-              <input
-                type="number"
-                id="maxPrice"
-                max={maxPrice}
-                onChange={handleMaxInputChange}
-                className=" w-full rounded-md  border border-text bg-background px-3 py-2 text-text focus:outline-none sm:text-sm"
-                value={inputValueMax}
-                placeholder={maxPriceString}
-              />
-            </div>
-          </div>
-          <h2 className="pl-5 pt-5 text-2xl text-text">Color</h2>
-          <ListOfParametrs
-            categories={categories}
-            handleCategoryFilterChange={handleColorFilterChange}
-          />
-
-          <h2 className="pl-5 pt-5 text-2xl text-text">Type</h2>
-          <ListOfParametrs
-            categories={schocoladeType}
-            handleCategoryFilterChange={handleTypeFilterChange}
+          <FilterShop
+            filteredProducts={filteredProducts}
+            handleColorFilterChange={handleColorFilterChange}
+            handleTypeFilterChange={handleTypeFilterChange}
           />
         </aside>
-        <div className="flex w-3/5 flex-col items-center">
-          <div className="m-4 mt-7 flex w-11/12 justify-between self-start rounded-md border-2 border-text bg-primary p-2">
-            <h1 className=" flex text-text">
+        <div className="flex w-3/5 flex-col items-center max-[1399px]:w-4/5 max-lg:w-full">
+          <div className=" m-4 mt-7 flex w-11/12 justify-between self-start rounded-md border-2 border-text bg-primary p-2">
+            <h1 className=" flex self-center text-text">
               Result {filteredProducts.length}
             </h1>
-            <select
-              id="sort-select"
-              value={sortedBy}
-              className="flex w-1/6 justify-end bg-primary text-text"
-              onChange={(e) => setSortedBy(e.target.value)}
-            >
-              <option value="By popularity"> By popularity </option>
-              <option value="By price: low-high"> By price: low-high </option>
-              <option value="By price: high-low"> By price: high-low </option>
-            </select>
+            <div className="flex">
+              <select
+                id="sort-select"
+                value={sortedBy}
+                className=" flex min-w-[130px] justify-end   bg-primary text-text"
+                onChange={(e) => setSortedBy(e.target.value)}
+              >
+                <option className="flex shrink" value="By popularity">
+                  By popularity
+                </option>
+                <option className="flex" value="By price: low-high">
+                  By price: low-high
+                </option>
+                <option className="flex" value="By price: high-low">
+                  By price: high-low
+                </option>
+              </select>
+
+              <IconButton
+                onClick={handleDialogOpen}
+                className="ml-1 mr-2 hidden w-1/6 items-center max-lg:flex"
+              >
+                <SlidersHorizontal size={32} className="flex text-text" />
+              </IconButton>
+              <Dialog open={dialogIsOpen} handler={handleDialogOpen}>
+                <DialogBody className="filters flex h-full w-11/12 flex-col justify-start rounded-md  border-2 border-text  bg-primary p-2">
+                  <FilterShop
+                    filteredProducts={filteredProducts}
+                    handleColorFilterChange={handleColorFilterChange}
+                    handleTypeFilterChange={handleTypeFilterChange}
+                  />
+                  <button
+                    className="flex self-end bg-primary p-2 text-text"
+                    onClick={handleDialogOpen}
+                  >
+                    Cancel
+                  </button>
+                </DialogBody>
+              </Dialog>
+            </div>
           </div>
-          <section className="products flex w-full flex-row flex-wrap justify-start self-start pt-10">
+          <section className="products flex w-full flex-row flex-wrap justify-start self-start pt-10 max-[660px]:justify-center ">
             {sortedProducts.map(({ image, name, id, price, totalSold }) => (
               <section
-                className=" img-slider-card max-h-auto m-7 flex w-1/4 flex-col items-center  rounded-md border-t-2 border-text  bg-primary p-4 text-center "
+                className=" img-slider-card max-h-auto m-7 flex w-1/4 flex-col items-center  rounded-md border-t-2 border-text  bg-primary p-4 text-center  max-[660px]:w-1/3"
                 key={id}
               >
                 <img
