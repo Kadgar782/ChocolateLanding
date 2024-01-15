@@ -1,18 +1,22 @@
 import { ChangeEventHandler, useState } from "react";
 import { SingleProduct } from "../../lib/features/productsSlice";
-import { ListOfParametrs } from "./filterList";
+import { ListOfParametrs } from "./shopFilterList";
 
 export const FilterShop = ({
   filteredProducts,
+  selectedCategoriesColors,
+  selectedCategoriesType,
   handleColorFilterChange,
   handleTypeFilterChange,
 }: {
   filteredProducts: SingleProduct[];
+  selectedCategoriesColors: string[];
+  selectedCategoriesType: string[];
   handleColorFilterChange: ChangeEventHandler<HTMLInputElement>;
   handleTypeFilterChange: ChangeEventHandler<HTMLInputElement>;
 }) => {
   // types of categories
-  const categories: string[] = ["blue", "violet", "brown"];
+  const color: string[] = ["blue", "violet", "brown"];
   const schocoladeType: string[] = ["dark", "white", "milk"];
 
   //   functions and variables for price filtering
@@ -83,12 +87,14 @@ export const FilterShop = ({
       </div>
       <h2 className="pl-5 pt-5 text-2xl text-text">Color</h2>
       <ListOfParametrs
-        categories={categories}
+        selectedCategories={selectedCategoriesColors}
+        categories={color}
         handleCategoryFilterChange={handleColorFilterChange}
       />
 
       <h2 className="pl-5 pt-5 text-2xl text-text">Type</h2>
       <ListOfParametrs
+        selectedCategories={selectedCategoriesType}
         categories={schocoladeType}
         handleCategoryFilterChange={handleTypeFilterChange}
       />

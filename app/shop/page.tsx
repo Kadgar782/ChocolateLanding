@@ -17,8 +17,8 @@ import { FilterShop } from "@/components/shopFilter";
 export default function Home() {
   const [sortedBy, setSortedBy] = useState<string>("By popularity");
   const [query, setQuery] = useState<string>("");
-  const [typeFilters, setTypeFilters] = useState<string[]>([]);
-  const [colorFilters, setColorFilters] = useState<string[]>([]);
+  const [selectedCategoriesColors, setSelectedColors] = useState<string[]>([]);
+  const [selectedCategoriesType, setSelectedType] = useState<string[]>([]);
   const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
 
   const products = useAppSelector(selectProducts);
@@ -29,11 +29,11 @@ export default function Home() {
   ) => {
     const checked = event.target.checked;
     const category = event.target.name;
-    setTypeFilters(
-      (prevFilters) =>
+    setSelectedType(
+      (prevCategories) =>
         checked
-          ? [...prevFilters, category] // Add if checked
-          : prevFilters.filter((filter) => filter !== category), // Remove if unchecked
+          ? [...prevCategories, category] // Add if checked
+          : prevCategories.filter((filter) => filter !== category), // Remove if unchecked
     );
   };
 
@@ -41,12 +41,12 @@ export default function Home() {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const checked = event.target.checked;
-    const category = event.target.name;
-    setColorFilters(
+    const color = event.target.name;
+    setSelectedColors(
       (prevFilters) =>
         checked
-          ? [...prevFilters, category] // Add if checked
-          : prevFilters.filter((filter) => filter !== category), // Remove if unchecked
+          ? [...prevFilters, color] // Add if checked
+          : prevFilters.filter((filter) => filter !== color), // Remove if unchecked
     );
   };
   console.log(dialogIsOpen);
@@ -57,14 +57,14 @@ export default function Home() {
   const filteredProducts = productsList.filter((product) => {
     // Check if the product's type matches any selected type filter
     const typeMatch =
-      typeFilters.length === 0 ||
-      typeFilters.some((filter) => filter === product.type);
+      selectedCategoriesType.length === 0 ||
+      selectedCategoriesType.some((filter) => filter === product.type);
 
     // Check if the product's color matches any selected color filter,
     // but only if there are active color filters
     const colorMatch =
-      colorFilters.length === 0 ||
-      colorFilters.some((filter) => filter === product.typeColor);
+      selectedCategoriesColors.length === 0 ||
+      selectedCategoriesColors.some((filter) => filter === product.typeColor);
 
     return typeMatch && colorMatch;
   });
@@ -90,6 +90,8 @@ export default function Home() {
           {/* categories to filter */}
           <FilterShop
             filteredProducts={filteredProducts}
+            selectedCategoriesColors={selectedCategoriesColors}
+            selectedCategoriesType={selectedCategoriesType}
             handleColorFilterChange={handleColorFilterChange}
             handleTypeFilterChange={handleTypeFilterChange}
           />
@@ -127,6 +129,8 @@ export default function Home() {
                 <DialogBody className="filters flex h-full w-11/12 flex-col justify-start rounded-md  border-2 border-text  bg-primary p-2">
                   <FilterShop
                     filteredProducts={filteredProducts}
+                    selectedCategoriesColors={selectedCategoriesColors}
+                    selectedCategoriesType={selectedCategoriesType}
                     handleColorFilterChange={handleColorFilterChange}
                     handleTypeFilterChange={handleTypeFilterChange}
                   />

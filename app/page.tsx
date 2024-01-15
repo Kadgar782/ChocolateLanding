@@ -2,8 +2,8 @@ import ProductCarousel from "./components/carousel";
 import { Review } from "./components/mainReviews";
 import { Bento } from "./components/mainBento";
 import { FirstLook } from "./components/mainFirstLook";
-import { Features } from "./components/features";
-import { FAQ } from "./components/FAQSection";
+import { Features } from "./components/mainFeatures";
+import { FAQ } from "./components/mainFAQSection";
 import { RegistrationCall } from "./components/callToRegistration";
 
 import "./page.css";

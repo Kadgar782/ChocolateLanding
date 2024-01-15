@@ -8,9 +8,11 @@ import { ChangeEventHandler } from "react";
 
 export const ListOfParametrs = ({
   categories,
+  selectedCategories,
   handleCategoryFilterChange,
 }: {
   categories: string[];
+  selectedCategories: string[];
   handleCategoryFilterChange: ChangeEventHandler<HTMLInputElement>;
 }) => {
   return categories.map((elm, index) => {
@@ -27,6 +29,7 @@ export const ListOfParametrs = ({
               crossOrigin=""
               key={index}
               name={elm}
+              checked={selectedCategories.includes(elm)}
               className=" flex flex-row bg-secondary hover:scale-105  hover:before:opacity-0"
               onChange={handleCategoryFilterChange}
               containerProps={{
