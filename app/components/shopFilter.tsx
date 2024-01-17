@@ -1,31 +1,29 @@
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, SetStateAction, useState } from "react";
 import { SingleProduct } from "../../lib/features/productsSlice";
 import { ListOfParametrs } from "./shopFilterList";
+import { propsFilters } from "@/shop/page";
 
-export const FilterShop = ({
-  filteredProducts,
-  selectedCategoriesColors,
-  selectedCategoriesType,
-  handleColorFilterChange,
-  handleTypeFilterChange,
-}: {
-  filteredProducts: SingleProduct[];
-  selectedCategoriesColors: string[];
-  selectedCategoriesType: string[];
-  handleColorFilterChange: ChangeEventHandler<HTMLInputElement>;
-  handleTypeFilterChange: ChangeEventHandler<HTMLInputElement>;
-}) => {
+export const FilterShop = ({ props }: { props: propsFilters }) => {
+  const {
+    filteredProducts,
+    selectedCategoriesColors,
+    selectedCategoriesType,
+    inputValueMin,
+    inputValueMax,
+    minPrice,
+    maxPrice,
+    setInputValueMin,
+    setInputValueMax,
+    handleColorFilterChange,
+    handleTypeFilterChange,
+  } = props;
+
   // types of categories
   const color: string[] = ["blue", "violet", "brown"];
   const schocoladeType: string[] = ["dark", "white", "milk"];
 
   //   functions and variables for price filtering
   const prices = filteredProducts.map((products) => products.price);
-  const minPrice = Math.min(...prices);
-  const maxPrice = Math.max(...prices);
-
-  const [inputValueMin, setInputValueMin] = useState(minPrice);
-  const [inputValueMax, setInputValueMax] = useState(maxPrice);
 
   const minPriceString = minPrice.toString();
   const maxPriceString = maxPrice.toString();

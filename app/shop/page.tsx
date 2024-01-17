@@ -1,28 +1,39 @@
 "use client";
 
 import { SetStateAction, useState } from "react";
-import {
-  Dialog,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
-  Drawer,
-  IconButton,
-} from "@material-tailwind/react";
+import { Dialog, DialogBody, IconButton } from "@material-tailwind/react";
 import { useAppSelector } from "../../lib/hooks";
 import { selectProducts } from "../../lib/features/productsSlice";
-import { SlidersHorizontal } from "lucide-react";
+import { ArrowDownUp, SlidersHorizontal } from "lucide-react";
+import { Dispatch, ChangeEventHandler } from "react";
+import { SingleProduct } from "../../lib/features/productsSlice";
 import { FilterShop } from "@/components/shopFilter";
+
+export interface propsFilters {
+  filteredProducts: SingleProduct[];
+  selectedCategoriesColors: string[];
+  selectedCategoriesType: string[];
+  inputValueMin: number;
+  inputValueMax: number;
+  minPrice: number;
+  maxPrice: number;
+  setInputValueMin: Dispatch<SetStateAction<number>>;
+  setInputValueMax: Dispatch<SetStateAction<number>>;
+  handleColorFilterChange: ChangeEventHandler<HTMLInputElement>;
+  handleTypeFilterChange: ChangeEventHandler<HTMLInputElement>;
+}
 
 export default function Home() {
   const [sortedBy, setSortedBy] = useState<string>("By popularity");
   const [query, setQuery] = useState<string>("");
   const [selectedCategoriesColors, setSelectedColors] = useState<string[]>([]);
   const [selectedCategoriesType, setSelectedType] = useState<string[]>([]);
-  const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
+  const [dialogFilterIsOpen, setFilterDialogIsOpen] = useState<boolean>(false);
+  const [dialogSortIsOpen, setSortDialogIsOpen] = useState<boolean>(false);
 
   const products = useAppSelector(selectProducts);
   const productsList = products.products;
+
   // the part with handlers for each type of product
   const handleTypeFilterChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -49,9 +60,17 @@ export default function Home() {
           : prevFilters.filter((filter) => filter !== color), // Remove if unchecked
     );
   };
-  console.log(dialogIsOpen);
-  //open Drawer
-  const handleDialogOpen = () => setDialogIsOpen(!dialogIsOpen);
+  //open Dialog
+  const handleFilterDialogOpen = () =>
+    setFilterDialogIsOpen(!dialogFilterIsOpen);
+
+  const handleSortDialogOpen = () => setSortDialogIsOpen(!dialogSortIsOpen);
+
+  const handleSortChange = (filter: string) => {
+    setSortedBy(filter);
+    setSortDialogIsOpen(!dialogSortIsOpen);
+  };
+
   // all filters applied together
 
   const filteredProducts = productsList.filter((product) => {
@@ -69,9 +88,43 @@ export default function Home() {
     return typeMatch && colorMatch;
   });
 
+  const prices = filteredProducts.map((products) => products.price);
+  const minPrice = Math.min(...prices);
+  const maxPrice = Math.max(...prices);
+
+  const [inputValueMin, setInputValueMin] = useState(minPrice);
+  const [inputValueMax, setInputValueMax] = useState(maxPrice);
+
+  const priceRange = () => {
+    const values: number[] = [];
+    for (let i = inputValueMin; i <= inputValueMax; i++) {
+      values.push(i);
+    }
+    return values;
+  };
+
+  const priceValue = priceRange();
+  const filteredProductsWithPrices = filteredProducts.filter((product) =>
+    priceValue.includes(product.price),
+  );
+
+  const propsForFilter = {
+    filteredProducts,
+    selectedCategoriesColors,
+    selectedCategoriesType,
+    inputValueMin,
+    inputValueMax,
+    minPrice,
+    maxPrice,
+    setInputValueMin,
+    setInputValueMax,
+    handleColorFilterChange,
+    handleTypeFilterChange,
+  };
+
   // // the part with sorting
 
-  const sortedProducts = filteredProducts.toSorted((a, b) => {
+  const sortedProducts = filteredProductsWithPrices.toSorted((a, b) => {
     switch (sortedBy) {
       case "By popularity":
         return b.totalSold - a.totalSold; // Descending popularity
@@ -88,24 +141,18 @@ export default function Home() {
       <div className="flex w-4/5 max-[1399px]:w-full ">
         <aside className="filters mt-7 flex w-1/6 flex-col justify-start rounded-md  border-2 border-text  bg-primary p-5 pl-0 max-[1399px]:ml-10 max-lg:hidden">
           {/* categories to filter */}
-          <FilterShop
-            filteredProducts={filteredProducts}
-            selectedCategoriesColors={selectedCategoriesColors}
-            selectedCategoriesType={selectedCategoriesType}
-            handleColorFilterChange={handleColorFilterChange}
-            handleTypeFilterChange={handleTypeFilterChange}
-          />
+          <FilterShop props={propsForFilter} />
         </aside>
         <div className="flex w-3/5 flex-col items-center max-[1399px]:w-4/5 max-lg:w-full">
           <div className=" m-4 mt-7 flex w-11/12 justify-between self-start rounded-md border-2 border-text bg-primary p-2">
             <h1 className=" flex self-center text-text">
-              Result {filteredProducts.length}
+              Result {filteredProductsWithPrices.length}
             </h1>
-            <div className="flex">
+            <div className="flex w-2/5 items-end justify-end">
               <select
                 id="sort-select"
                 value={sortedBy}
-                className=" flex min-w-[130px] justify-end   bg-primary text-text"
+                className=" flex min-w-[130px] justify-end  bg-primary  text-text  max-lg:hidden"
                 onChange={(e) => setSortedBy(e.target.value)}
               >
                 <option className="flex shrink" value="By popularity">
@@ -118,25 +165,52 @@ export default function Home() {
                   By price: high-low
                 </option>
               </select>
-
+              {/* Dialog with sort */}
               <IconButton
-                onClick={handleDialogOpen}
-                className="ml-1 mr-2 hidden w-1/6 items-center max-lg:flex"
+                onClick={handleSortDialogOpen}
+                className=" mr-4 hidden w-1/6 items-center self-center  max-lg:flex"
               >
-                <SlidersHorizontal size={32} className="flex text-text" />
+                <ArrowDownUp className="flex text-text" />
               </IconButton>
-              <Dialog open={dialogIsOpen} handler={handleDialogOpen}>
+              <Dialog open={dialogSortIsOpen} handler={handleSortDialogOpen}>
+                <DialogBody className="sort flex h-full w-11/12 flex-col items-start justify-start rounded-md  border-2 border-text  bg-primary p-2">
+                  <button
+                    className="flex  bg-primary p-2 text-text"
+                    onClick={() => handleSortChange("By popularity")}
+                  >
+                    By popularity
+                  </button>
+                  <button
+                    className="flex  bg-primary p-2 text-text"
+                    onClick={() => handleSortChange("By price: low-high")}
+                  >
+                    By price: low-high
+                  </button>
+                  <button
+                    className="flex  bg-primary p-2 text-text"
+                    onClick={() => handleSortChange("By price: high-low")}
+                  >
+                    By price: high-low
+                  </button>
+                </DialogBody>
+              </Dialog>
+              {/* Dialog with Filter */}
+              <IconButton
+                onClick={handleFilterDialogOpen}
+                className=" mr-4 hidden w-1/6 items-center self-center max-lg:flex"
+              >
+                <SlidersHorizontal className="flex text-text" />
+              </IconButton>
+
+              <Dialog
+                open={dialogFilterIsOpen}
+                handler={handleFilterDialogOpen}
+              >
                 <DialogBody className="filters flex h-full w-11/12 flex-col justify-start rounded-md  border-2 border-text  bg-primary p-2">
-                  <FilterShop
-                    filteredProducts={filteredProducts}
-                    selectedCategoriesColors={selectedCategoriesColors}
-                    selectedCategoriesType={selectedCategoriesType}
-                    handleColorFilterChange={handleColorFilterChange}
-                    handleTypeFilterChange={handleTypeFilterChange}
-                  />
+                  <FilterShop props={propsForFilter} />
                   <button
                     className="flex self-end bg-primary p-2 text-text"
-                    onClick={handleDialogOpen}
+                    onClick={handleFilterDialogOpen}
                   >
                     Cancel
                   </button>
