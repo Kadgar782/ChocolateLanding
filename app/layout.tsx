@@ -24,7 +24,7 @@ export default function RootLayout({
             <nav className="flex grow flex-row bg-accent text-text max-md:flex-col-reverse">
               <div className="Logo w-1/3 max-md:w-1/5"></div>
               {/* it will be necessary to add redux */}
-              <div className="searchBar flex min-h-[40px] w-1/3 content-center justify-center self-center rounded-lg border-2 border-text bg-primary max-md:w-full ">
+              <div className="searchBar flex min-h-[40px] w-1/3 content-center justify-center self-center rounded-lg border-2 border-text bg-primary max-md:mb-2 max-md:w-11/12">
                 <input
                   placeholder="Search"
                   className="w-full rounded-lg border-text  bg-primary pl-2 text-text"

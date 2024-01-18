@@ -5,7 +5,6 @@ import { propsFilters } from "@/shop/page";
 
 export const FilterShop = ({ props }: { props: propsFilters }) => {
   const {
-    filteredProducts,
     selectedCategoriesColors,
     selectedCategoriesType,
     inputValueMin,
@@ -23,8 +22,6 @@ export const FilterShop = ({ props }: { props: propsFilters }) => {
   const schocoladeType: string[] = ["dark", "white", "milk"];
 
   //   functions and variables for price filtering
-  const prices = filteredProducts.map((products) => products.price);
-
   const minPriceString = minPrice.toString();
   const maxPriceString = maxPrice.toString();
 

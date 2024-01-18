@@ -6,11 +6,9 @@ import { useAppSelector } from "../../lib/hooks";
 import { selectProducts } from "../../lib/features/productsSlice";
 import { ArrowDownUp, SlidersHorizontal } from "lucide-react";
 import { Dispatch, ChangeEventHandler } from "react";
-import { SingleProduct } from "../../lib/features/productsSlice";
 import { FilterShop } from "@/components/shopFilter";
 
 export interface propsFilters {
-  filteredProducts: SingleProduct[];
   selectedCategoriesColors: string[];
   selectedCategoriesType: string[];
   inputValueMin: number;
