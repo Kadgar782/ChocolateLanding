@@ -14,7 +14,7 @@ import {
 import "../../components/css/carousel.css";
 import "swiper/css";
 import "swiper/css/scrollbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Page({ params }: { params: { id: number } }) {
@@ -26,13 +26,11 @@ export default function Page({ params }: { params: { id: number } }) {
   const imagePlaceholder = "https://placehold.co/500x500";
   //making an array with a placeholders
   const arrayToRender = Array.from({ length: 10 }, (_, index) => index);
-  console.log(arrayToRender);
+
+  const [selectedImage, setSelectedImage] = useState("");
 
   if (currentProduct) {
     const { id, image, name, price, type, typeColor } = currentProduct;
-
-    const [selectedImage, setSelectedImage] = useState(image);
-
     const handleImageClick = (newImage: string) => {
       // Set the selected image index when an image is clicked
       setSelectedImage(newImage);
@@ -83,26 +81,26 @@ export default function Page({ params }: { params: { id: number } }) {
             <div className="big-image  relative ml-1 flex h-full w-4/5 place-content-center  ">
               <img
                 className="flex h-[96%] w-auto justify-center self-center rounded-lg"
-                src={selectedImage}
+                src={selectedImage !== "" ? selectedImage : image}
               />
             </div>
           </section>
           <section className="specifications flex h-[450px] w-[35%] text-xl">
             <dl className="mt-4 flex flex-col">
               <div className="mb-3 flex gap-5">
-                <dt className="text-textDt font-bold">Name:</dt>
+                <dt className="font-bold text-textDt">Name:</dt>
                 <dd className="text-text">{name}</dd>
               </div>
               <div className="mb-3 flex gap-5">
-                <dt className="text-textDt font-bold">Price:</dt>
+                <dt className="font-bold text-textDt">Price:</dt>
                 <dd className="text-text">{price}</dd>
               </div>
               <div className="mb-3 flex gap-5">
-                <dt className="text-textDt font-bold">Type:</dt>
+                <dt className="font-bold text-textDt">Type:</dt>
                 <dd className="text-text">{type}</dd>
               </div>
               <div className="mb-3 flex gap-5">
-                <dt className="text-textDt font-bold">Color:</dt>
+                <dt className="font-bold text-textDt">Color:</dt>
                 <dd className="text-text">{typeColor}</dd>
               </div>
             </dl>
@@ -133,6 +131,6 @@ export default function Page({ params }: { params: { id: number } }) {
       </section>
     );
   } else {
-    return <div> don't exist</div>;
+    return <div> 404</div>;
   }
 }
