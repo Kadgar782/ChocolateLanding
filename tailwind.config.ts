@@ -18,6 +18,7 @@ const config: Config = {
     },
     colors: {
       text: "#bca66e",
+      textDt: "#bfaf86",
       textAlt: "#928581",
       background: "#45190c",
       bento: "#ddcea0",
