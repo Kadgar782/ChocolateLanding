@@ -7,6 +7,7 @@ import { selectProducts } from "../../lib/features/productsSlice";
 import { ArrowDownUp, SlidersHorizontal } from "lucide-react";
 import { Dispatch, ChangeEventHandler } from "react";
 import { FilterShop } from "@/components/shopFilter";
+import Link from "next/link";
 
 export interface propsFilters {
   selectedCategoriesColors: string[];
@@ -31,6 +32,7 @@ export default function Home() {
 
   const products = useAppSelector(selectProducts);
   const productsList = products.products;
+  const baseApi = "http://localhost:3000/";
 
   // the part with handlers for each type of product
   const handleTypeFilterChange = (
@@ -218,9 +220,11 @@ export default function Home() {
           </div>
           <section className="products flex w-full flex-row flex-wrap justify-start self-start pt-10 max-[660px]:justify-center ">
             {sortedProducts.map(({ image, name, id, price, totalSold }) => (
-              <section
-                className=" img-slider-card max-h-auto m-7 flex w-1/4 flex-col items-center  rounded-md border-t-2 border-text  bg-primary p-4 text-center  max-[660px]:w-1/3"
+              <Link
                 key={id}
+                target="_blank"
+                href={`${baseApi}product/${id}`}
+                className=" img-slider-card max-h-auto m-7 flex w-1/4 flex-col items-center  rounded-md border-t-2 border-text  bg-primary p-4 text-center  max-[660px]:w-1/3"
               >
                 <img
                   key={id}
@@ -231,7 +235,7 @@ export default function Home() {
                 <h1 className="img-slider-text text-text">{price}$</h1>
                 <h1 className="img-slider-text text-text">{totalSold} sold</h1>
                 <h2 className="img-slider-text text-text">{name}</h2>
-              </section>
+              </Link>
             ))}
           </section>
         </div>
