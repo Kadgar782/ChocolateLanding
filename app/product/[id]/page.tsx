@@ -53,7 +53,6 @@ export default function Page({ params }: { params: { id: number } }) {
 
   const [selectedImage, setSelectedImage] = useState("");
   const [choosenTab, setChoosenTab] = useState("Description");
-  console.log(choosenTab);
 
   if (currentProduct) {
     const { id, image, name, price, type, typeColor } = currentProduct;

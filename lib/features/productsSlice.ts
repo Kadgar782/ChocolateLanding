@@ -13,6 +13,14 @@ export interface SingleProduct {
   quantityOnStock: number;
 }
 
+export interface CartItem extends SingleProduct {
+  quantityInCart: number;
+}
+
+export interface CartRootState {
+  cart: CartItem[];
+}
+
 export type Products = SingleProduct[];
 
 // Define a type for the slice state
@@ -128,6 +136,17 @@ const initialState: ProductsState = {
 
 export const productsSlice = createSlice({
   name: "products",
+  // `createSlice` will infer the state type from the `initialState` argument
+  initialState,
+  reducers: {
+    addProduct: (state: ProductsState, action: PayloadAction<Products>) => {
+      state.products.push(...action.payload);
+    },
+  },
+});
+
+export const cartSlice = createSlice({
+  name: "productsInCart",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
