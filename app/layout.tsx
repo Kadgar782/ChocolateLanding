@@ -65,7 +65,10 @@ export default async function RootLayout({
                   )}
                   {!user ? null : (
                     <Link className="pr-8" href="/cart">
-                      <ShoppingCart className=" mr-9 stroke-text" />
+                      <div className=" mr-9 flex flex-col items-center justify-center  pb-5 pr-8 pt-5">
+                        <ShoppingCart className="  stroke-text" />
+                        <p className="text-sm text-text">Cart</p>
+                      </div>
                     </Link>
                   )}
                 </div>

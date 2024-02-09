@@ -18,8 +18,12 @@ import "../../components/css/carousel.css";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import { useState } from "react";
-import Link from "next/link";
-import { addToCart } from "../../../lib/features/productsInCartSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {
+  addToCart,
+  selectCartProducts,
+} from "../../../lib/features/productsInCartSlice";
 
 export default function Page({ params }: { params: { id: number } }) {
   const products = useAppSelector(selectProducts);
@@ -65,6 +69,13 @@ export default function Page({ params }: { params: { id: number } }) {
       setSelectedImage(newImage);
     };
 
+    // check if item is already in the cart
+    const productsInCart = useAppSelector(selectCartProducts);
+    const cartArray = productsInCart.cart;
+    const currentProductInCart = cartArray.some((item) => item.id);
+    console.log(paramId);
+    console.log(currentProductInCart);
+
     const handleTabClick = (newTab: string) => {
       // Set the selected image index when an image is clicked
       setChoosenTab(newTab);
@@ -79,6 +90,7 @@ export default function Page({ params }: { params: { id: number } }) {
           },
         ]),
       );
+      toast("Item added to Cart");
     };
     return (
       <section className="wholePage wholePage flex min-h-screen w-full flex-wrap justify-center bg-background">
@@ -164,9 +176,12 @@ export default function Page({ params }: { params: { id: number } }) {
               </h1>
               <button
                 className="flex h-16 items-center justify-center rounded-md bg-secondary  px-2 pl-2 pr-4  text-center text-text"
+                disabled={currentProductInCart}
                 onClick={() => handleAddToCart(currentProduct)}
               >
-                <strong>Add to cart</strong>
+                <strong>
+                  {currentProductInCart ? "Item in Cart" : "Add to cart"}
+                </strong>
               </button>
             </div>
             <div className="ShippingInformation  flex h-[300px] w-full flex-col   items-center gap-4 rounded-xl bg-primary ">
@@ -208,6 +223,7 @@ export default function Page({ params }: { params: { id: number } }) {
             </TabsBody>
           </Tabs>
         </section>
+        <ToastContainer />
       </section>
     );
   } else {

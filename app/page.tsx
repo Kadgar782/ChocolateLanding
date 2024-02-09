@@ -6,8 +6,6 @@ import { Features } from "./components/mainFeatures";
 import { FAQ } from "./components/mainFAQSection";
 import { RegistrationCall } from "./components/callToRegistration";
 
-import "./page.css";
-
 export default function Home() {
   return (
     //The first section with an image of the product, a brief description of it and a purchase button

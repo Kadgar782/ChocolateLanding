@@ -2,12 +2,20 @@
 
 import { SetStateAction, useState } from "react";
 import { Dialog, DialogBody, IconButton } from "@material-tailwind/react";
-import { useAppSelector } from "../../lib/hooks";
-import { selectProducts } from "../../lib/features/productsSlice";
+import { useAppDispatch, useAppSelector } from "../../lib/hooks";
+import {
+  SingleProduct,
+  selectProducts,
+} from "../../lib/features/productsSlice";
 import { ArrowDownUp, SlidersHorizontal } from "lucide-react";
 import { Dispatch, ChangeEventHandler } from "react";
 import { FilterShop } from "@/components/shopFilter";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import {
+  addToCart,
+  selectCartProducts,
+} from "../../lib/features/productsInCartSlice";
 
 export interface propsFilters {
   selectedCategoriesColors: string[];
@@ -136,6 +144,25 @@ export default function Home() {
         return 0; // No sorting
     }
   });
+  // cart logic
+  const dispatch = useAppDispatch();
+  const handleAddToCart = (product: SingleProduct) => {
+    dispatch(
+      addToCart([
+        {
+          ...product,
+          quantityInCart: 1, // Set the initial quantity to 1 (or any default value)
+        },
+      ]),
+    );
+    toast("Item added to Cart");
+  };
+
+  // check if item is already in the cart
+  const productsInCart = useAppSelector(selectCartProducts);
+  const cartArray = productsInCart.cart;
+  console.log(cartArray);
+
   return (
     <section className="wholePage flex min-h-screen w-full  justify-end bg-background">
       <div className="flex w-4/5 max-[1399px]:w-full ">
@@ -218,24 +245,44 @@ export default function Home() {
               </Dialog>
             </div>
           </div>
-          <section className="products flex w-full flex-row flex-wrap justify-start self-start pt-10 max-[660px]:justify-center ">
-            {sortedProducts.map(({ image, name, id, price, totalSold }) => (
-              <Link
-                key={id}
-                target="_blank"
-                href={`${baseApi}product/${id}`}
-                className=" img-slider-card max-h-auto m-7 flex w-1/4 flex-col items-center  rounded-md border-t-2 border-text  bg-primary p-4 text-center  max-[660px]:w-1/3"
+          <section className="products flex w-full flex-row flex-wrap justify-start self-start pt-5 max-[660px]:justify-center ">
+            {sortedProducts.map((item) => (
+              <div
+                key={item.id}
+                className=" max-h-auto m-7 flex w-1/4 flex-col items-center  rounded-md border-t-2 border-text  bg-primary p-4 text-center  max-[660px]:w-1/3"
               >
-                <img
-                  key={id}
-                  src={image}
-                  alt={name}
-                  className="img-slider-img  flex h-auto max-h-[164px] max-w-full flex-shrink-0 flex-grow-0 hover:-translate-y-1 lg:max-h-[222px]"
-                />
-                <h1 className="img-slider-text text-text">{price}$</h1>
-                <h1 className="img-slider-text text-text">{totalSold} sold</h1>
-                <h2 className="img-slider-text text-text">{name}</h2>
-              </Link>
+                <Link
+                  key={item.id}
+                  target="_blank"
+                  href={`${baseApi}product/${item.id}`}
+                  className=" img-slider-card flex flex-col items-center "
+                >
+                  <img
+                    key={item.id}
+                    src={item.image}
+                    alt={item.name}
+                    className="img-slider-img  flex h-auto max-h-[164px] max-w-full flex-shrink-0 flex-grow-0 hover:-translate-y-1 lg:max-h-[222px]"
+                  />
+                  <h1 className="img-slider-text text-text">{item.price}$</h1>
+                  <h1 className="img-slider-text text-text">
+                    {item.totalSold} sold
+                  </h1>
+                  <h2 className="img-slider-text text-text">{item.name}</h2>
+                </Link>
+                <button
+                  className="flex h-10 items-center justify-center rounded-md bg-secondary  px-2 pl-2 pr-4  text-center text-text"
+                  disabled={cartArray.some(
+                    (cartItem) => cartItem.id == item.id,
+                  )}
+                  onClick={() => handleAddToCart(item)}
+                >
+                  <strong>
+                    {cartArray.some((cartItem) => cartItem.id == item.id)
+                      ? "Item in Cart"
+                      : "Add to cart"}
+                  </strong>
+                </button>
+              </div>
             ))}
           </section>
         </div>
