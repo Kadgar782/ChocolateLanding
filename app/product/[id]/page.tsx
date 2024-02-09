@@ -27,6 +27,8 @@ import {
 
 export default function Page({ params }: { params: { id: number } }) {
   const products = useAppSelector(selectProducts);
+  const productsInCart = useAppSelector(selectCartProducts);
+  const dispatch = useAppDispatch();
   const productsList = products.products;
   const paramId = Number(params.id);
   //we are looking for a product with the same ID as in the url
@@ -70,7 +72,7 @@ export default function Page({ params }: { params: { id: number } }) {
     };
 
     // check if item is already in the cart
-    const productsInCart = useAppSelector(selectCartProducts);
+
     const cartArray = productsInCart.cart;
     const currentProductInCart = cartArray.some((item) => item.id);
     console.log(paramId);
@@ -80,7 +82,7 @@ export default function Page({ params }: { params: { id: number } }) {
       // Set the selected image index when an image is clicked
       setChoosenTab(newTab);
     };
-    const dispatch = useAppDispatch();
+
     const handleAddToCart = (product: SingleProduct) => {
       dispatch(
         addToCart([
