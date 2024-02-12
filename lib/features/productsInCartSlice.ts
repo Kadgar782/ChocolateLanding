@@ -29,6 +29,33 @@ export const cartSlice = createSlice({
     addToCart: (state: CartRootState, action: PayloadAction<CartProducts>) => {
       state.cart.push(...action.payload);
     },
+    increaseQuantity(
+      state: CartRootState,
+      action: PayloadAction<CartUpdateParametrs>,
+    ) {
+      const { id, quantityInCart } = action.payload;
+      const increaseQuantity = quantityInCart + 1;
+      const itemToUpdate = state.cart.find((item) => item.id === id);
+      console.log(increaseQuantity);
+
+      if (itemToUpdate) {
+        itemToUpdate.quantityInCart = increaseQuantity;
+      }
+    },
+    decreaseQuantity(
+      state: CartRootState,
+      action: PayloadAction<CartUpdateParametrs>,
+    ) {
+      const { id, quantityInCart } = action.payload;
+      console.log(id);
+      const decreaseQuantity = quantityInCart > 1 ? quantityInCart - 1 : 1;
+      console.log(increaseQuantity);
+      const itemToUpdate = state.cart.find((item) => item.id === id);
+
+      if (itemToUpdate) {
+        itemToUpdate.quantityInCart = decreaseQuantity;
+      }
+    },
     updateQuantity(
       state: CartRootState,
       action: PayloadAction<CartUpdateParametrs>,
@@ -50,7 +77,13 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, updateQuantity, removeFromCart } = cartSlice.actions;
+export const {
+  addToCart,
+  updateQuantity,
+  removeFromCart,
+  decreaseQuantity,
+  increaseQuantity,
+} = cartSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCartProducts = (state: RootState) => state.productsInCart;
