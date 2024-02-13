@@ -4,6 +4,7 @@ import type { RootState } from "../store";
 
 export interface CartItem extends SingleProduct {
   quantityInCart: number;
+  isSelected: boolean;
 }
 
 export interface CartRootState {
@@ -21,6 +22,11 @@ export interface CartUpdateParametrs {
   quantityInCart: number;
 }
 
+export interface CartSelectParametrs {
+  id: number;
+  isSelected: boolean;
+}
+
 export const cartSlice = createSlice({
   name: "productsInCart",
   // `createSlice` will infer the state type from the `initialState` argument
@@ -34,9 +40,8 @@ export const cartSlice = createSlice({
       action: PayloadAction<CartUpdateParametrs>,
     ) {
       const { id, quantityInCart } = action.payload;
-      const increaseQuantity = quantityInCart + 1;
+      const increaseQuantity = quantityInCart < 10 ? quantityInCart + 1 : 10;
       const itemToUpdate = state.cart.find((item) => item.id === id);
-      console.log(increaseQuantity);
 
       if (itemToUpdate) {
         itemToUpdate.quantityInCart = increaseQuantity;
@@ -47,9 +52,7 @@ export const cartSlice = createSlice({
       action: PayloadAction<CartUpdateParametrs>,
     ) {
       const { id, quantityInCart } = action.payload;
-      console.log(id);
       const decreaseQuantity = quantityInCart > 1 ? quantityInCart - 1 : 1;
-      console.log(increaseQuantity);
       const itemToUpdate = state.cart.find((item) => item.id === id);
 
       if (itemToUpdate) {
@@ -67,12 +70,34 @@ export const cartSlice = createSlice({
         itemToUpdate.quantityInCart = quantityInCart;
       }
     },
+    selectProductInCart: (
+      state: CartRootState,
+      action: PayloadAction<number>,
+    ) => {
+      const id = action.payload;
+      const itemToUpdate = state.cart.find((item) => item.id === id);
+
+      if (itemToUpdate) {
+        const newState = !itemToUpdate.isSelected;
+        itemToUpdate.isSelected = newState;
+      }
+    },
+    selectAllProductsInCart: (state: CartRootState) => {
+      const cart = state.cart;
+
+      if (cart.some((item) => item.isSelected == false)) {
+        state.cart = state.cart.map((item) => ({ ...item, isSelected: true }));
+      } else {
+        state.cart = state.cart.map((item) => ({ ...item, isSelected: false }));
+      }
+    },
     removeFromCart: (state: CartRootState, action: PayloadAction<number>) => {
       const productIdToRemove = action.payload;
       state.cart = state.cart.filter((item) => item.id !== productIdToRemove);
     },
-    removeAllFromCart: (state: CartRootState) => {
-      state.cart = [];
+    removeSelectedProducts: (state: CartRootState) => {
+      // Remove products with selected labels
+      state.cart = state.cart.filter((items) => items.isSelected === false);
     },
   },
 });
@@ -83,6 +108,9 @@ export const {
   removeFromCart,
   decreaseQuantity,
   increaseQuantity,
+  removeSelectedProducts,
+  selectProductInCart,
+  selectAllProductsInCart,
 } = cartSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

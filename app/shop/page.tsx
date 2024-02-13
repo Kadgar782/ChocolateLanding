@@ -10,6 +10,7 @@ import {
 import { ArrowDownUp, SlidersHorizontal } from "lucide-react";
 import { Dispatch, ChangeEventHandler } from "react";
 import { FilterShop } from "@/components/shopFilter";
+import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import {
@@ -37,6 +38,8 @@ export default function Home() {
   const [selectedCategoriesType, setSelectedType] = useState<string[]>([]);
   const [dialogFilterIsOpen, setFilterDialogIsOpen] = useState<boolean>(false);
   const [dialogSortIsOpen, setSortDialogIsOpen] = useState<boolean>(false);
+
+  const { isLoaded, isSignedIn, user } = useUser();
 
   const products = useAppSelector(selectProducts);
   const productsList = products.products;
@@ -152,6 +155,7 @@ export default function Home() {
         {
           ...product,
           quantityInCart: 1, // Set the initial quantity to 1 (or any default value)
+          isSelected: false,
         },
       ]),
     );
@@ -269,19 +273,21 @@ export default function Home() {
                   </h1>
                   <h2 className="img-slider-text text-text">{item.name}</h2>
                 </Link>
-                <button
-                  className="flex h-10 items-center justify-center rounded-md bg-secondary  px-2 pl-2 pr-4  text-center text-text"
-                  disabled={cartArray.some(
-                    (cartItem) => cartItem.id == item.id,
-                  )}
-                  onClick={() => handleAddToCart(item)}
-                >
-                  <strong>
-                    {cartArray.some((cartItem) => cartItem.id == item.id)
-                      ? "Item in Cart"
-                      : "Add to cart"}
-                  </strong>
-                </button>
+                {!isLoaded || !isSignedIn ? null : (
+                  <button
+                    className="mt-4  flex h-10 items-center justify-center  rounded-md bg-secondary px-2  pl-2 pr-4  text-center text-text"
+                    disabled={cartArray.some(
+                      (cartItem) => cartItem.id == item.id,
+                    )}
+                    onClick={() => handleAddToCart(item)}
+                  >
+                    <strong>
+                      {cartArray.some((cartItem) => cartItem.id == item.id)
+                        ? "Item in Cart"
+                        : "Add to cart"}
+                    </strong>
+                  </button>
+                )}
               </div>
             ))}
           </section>

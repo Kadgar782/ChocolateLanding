@@ -19,6 +19,7 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { SignInButton, useUser } from "@clerk/nextjs";
 import "react-toastify/dist/ReactToastify.css";
 import {
   addToCart,
@@ -26,6 +27,7 @@ import {
 } from "../../../lib/features/productsInCartSlice";
 
 export default function Page({ params }: { params: { id: number } }) {
+  const { isLoaded, isSignedIn, user } = useUser();
   const products = useAppSelector(selectProducts);
   const productsInCart = useAppSelector(selectCartProducts);
   const dispatch = useAppDispatch();
@@ -75,8 +77,6 @@ export default function Page({ params }: { params: { id: number } }) {
 
     const cartArray = productsInCart.cart;
     const currentProductInCart = cartArray.some((item) => item.id);
-    console.log(paramId);
-    console.log(currentProductInCart);
 
     const handleTabClick = (newTab: string) => {
       // Set the selected image index when an image is clicked
@@ -89,6 +89,7 @@ export default function Page({ params }: { params: { id: number } }) {
           {
             ...product,
             quantityInCart: 1, // Set the initial quantity to 1 (or any default value)
+            isSelected: false,
           },
         ]),
       );
@@ -176,15 +177,31 @@ export default function Page({ params }: { params: { id: number } }) {
               <h1 className=" ml-3 flex self-start text-3xl text-text">
                 {price} $
               </h1>
-              <button
-                className="flex h-16 items-center justify-center rounded-md bg-secondary  px-2 pl-2 pr-4  text-center text-text"
-                disabled={currentProductInCart}
-                onClick={() => handleAddToCart(currentProduct)}
-              >
-                <strong>
-                  {currentProductInCart ? "Item in Cart" : "Add to cart"}
-                </strong>
-              </button>
+
+              {!isLoaded || !isSignedIn ? (
+                <div className="flex flex-col  items-center justify-center gap-1">
+                  <p className=" flex text-xl text-text">
+                    Login or sign up to purchase
+                  </p>
+                  <div className="flex flex-col items-center justify-center pr-8">
+                    <SignInButton mode="modal">
+                      <button className="flex h-10 items-center justify-center rounded-md bg-secondary   pl-2 pr-4  text-center text-text">
+                        Login
+                      </button>
+                    </SignInButton>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  className="flex h-16 items-center justify-center rounded-md bg-secondary   pl-2 pr-4  text-center text-text"
+                  disabled={currentProductInCart}
+                  onClick={() => handleAddToCart(currentProduct)}
+                >
+                  <strong>
+                    {currentProductInCart ? "Item in Cart" : "Add to cart"}
+                  </strong>
+                </button>
+              )}
             </div>
             <div className="ShippingInformation  flex h-[300px] w-full flex-col   items-center gap-4 rounded-xl bg-primary ">
               <h1 className=" ml-3 mt-3 flex self-center text-2xl text-text">

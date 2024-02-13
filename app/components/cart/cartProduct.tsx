@@ -4,6 +4,7 @@ import {
   increaseQuantity,
   removeFromCart,
   decreaseQuantity,
+  selectProductInCart,
 } from "../../../lib/features/productsInCartSlice";
 import { CartUpdateParametrs } from "../../../lib/features/productsInCartSlice";
 import { CartItem } from "../../../lib/features/productsInCartSlice";
@@ -12,8 +13,7 @@ type HandleCheckboxChange = (id: number) => void;
 export const ProductInCart: React.FC<{
   product: CartItem;
   selectedItems: number[];
-  handleCheckboxChange: HandleCheckboxChange;
-}> = ({ product, selectedItems, handleCheckboxChange }) => {
+}> = ({ product, selectedItems }) => {
   const dispatch = useAppDispatch();
   const actionQuantity: CartUpdateParametrs = {
     id: product.id,
@@ -24,11 +24,12 @@ export const ProductInCart: React.FC<{
   };
   const handleIncrease = () => {
     dispatch(increaseQuantity(actionQuantity));
-    console.log(actionQuantity);
   };
   const handleDecrease = () => {
     dispatch(decreaseQuantity(actionQuantity));
-    console.log(actionQuantity);
+  };
+  const handleSelect = () => {
+    dispatch(selectProductInCart(product.id));
   };
 
   return (
@@ -40,8 +41,8 @@ export const ProductInCart: React.FC<{
         <input
           type="checkbox"
           name="checkbox-product"
-          checked={selectedItems.includes(product.id)}
-          onChange={() => handleCheckboxChange(product.id)}
+          checked={product.isSelected}
+          onChange={() => handleSelect()}
         />
       </label>
       <div className="flex h-24 w-24 items-center justify-center self-center px-4">
@@ -64,11 +65,8 @@ export const ProductInCart: React.FC<{
           className=" mx-4 flex w-11 items-center rounded-md border-2 border-text bg-background text-center"
           type="number"
           min="1"
-          max="100"
+          max="10"
           value={product.quantityInCart}
-          onChange={(e) =>
-            console.log("Update quantity in your component state")
-          }
         />
         <Plus
           className="w-{32px} h-{32px} flex cursor-pointer "
