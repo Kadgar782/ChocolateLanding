@@ -1,26 +1,15 @@
 "use client";
 
-import { IconButton } from "@material-tailwind/react";
 import {
   selectCartProducts,
-  removeFromCart,
   updateQuantity,
   removeSelectedProducts,
   selectAllProductsInCart,
 } from "../../lib/features/productsInCartSlice";
-import { SingleProduct } from "../../lib/features/productsSlice";
 import { ProductInCart } from "@/components/cart/cartProduct";
 import { useAppSelector, useAppDispatch } from "../../lib/hooks";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { useState } from "react";
-
-interface CartSingleItem {
-  id: number;
-  quantityInCart: number;
-}
-interface CartUpdateParametrs {
-  cart: CartSingleItem[];
-}
 
 export default function Cart() {
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
@@ -32,27 +21,6 @@ export default function Cart() {
     (item) => item.isSelected === true,
   );
   const baseApi = "http://localhost:3000/";
-
-  const handleCheckboxChange = (id: number) => {
-    // Toggle the selection of the item with the given id
-    setSelectedItems((prevSelectedItems) => {
-      if (prevSelectedItems.includes(id)) {
-        return prevSelectedItems.filter((item) => item !== id);
-      } else {
-        return [...prevSelectedItems, id];
-      }
-    });
-  };
-
-  const handleUpdateQuantity = (id: number, quantityInCart: number) => {
-    // Update the quantity of a specific product in the cart
-    dispatch(
-      updateQuantity({
-        id,
-        quantityInCart,
-      }),
-    );
-  };
 
   const handleRemoveSelectedProducts = () => {
     dispatch(removeSelectedProducts());
@@ -88,11 +56,7 @@ export default function Cart() {
           </label>
 
           {cartProductsList.map((product) => (
-            <ProductInCart
-              key={product.id}
-              product={product}
-              selectedItems={selectedItems}
-            />
+            <ProductInCart key={product.id} product={product} />
           ))}
         </div>
       </section>

@@ -1,15 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import {
-  ClerkProvider,
-  SignOutButton,
-  currentUser,
-  SignInButton,
-} from "@clerk/nextjs";
+import { ClerkProvider, SignOutButton, currentUser } from "@clerk/nextjs";
 import Link from "next/link";
+import { ItemsInCartCount } from "./components/cart/cartCount";
 import StoreProvider from "./storeProvider";
+import { CustomSignIn } from "./components/authentication/customSignIn";
 import { KeyRound, ShoppingCart } from "lucide-react";
+import { useAppSelector } from "../lib/hooks";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,11 +46,7 @@ export default async function RootLayout({
                   </Link>
                   {!user ? (
                     <div className="flex flex-col items-center justify-center pr-8">
-                      <SignInButton mode="modal">
-                        <button className=" flex flex-col items-center justify-center text-sm">
-                          <KeyRound /> login
-                        </button>
-                      </SignInButton>
+                      <CustomSignIn />
                     </div>
                   ) : (
                     <div className=" flex flex-col items-center justify-center  pb-5 pr-8 pt-5">
@@ -65,7 +59,8 @@ export default async function RootLayout({
                   )}
                   {!user ? null : (
                     <Link className="pr-8" href="/cart">
-                      <div className=" mr-9 flex flex-col items-center justify-center  pb-5 pr-8 pt-5">
+                      <div className=" relative mr-9 flex flex-col items-center justify-center  pb-5 pr-8 pt-5">
+                        <ItemsInCartCount />
                         <ShoppingCart className="  stroke-text" />
                         <p className="text-sm text-text">Cart</p>
                       </div>

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { CustomAccordion } from "./accordion";
+import { CustomAccordion } from "../accordion";
 
 export const FAQ = () => {
   const LorumIpsum =

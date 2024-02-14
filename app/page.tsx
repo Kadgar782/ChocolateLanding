@@ -1,10 +1,10 @@
 import ProductCarousel from "./components/carousel";
-import { Review } from "./components/mainReviews";
-import { Bento } from "./components/mainBento";
-import { FirstLook } from "./components/mainFirstLook";
-import { Features } from "./components/mainFeatures";
-import { FAQ } from "./components/mainFAQSection";
-import { RegistrationCall } from "./components/callToRegistration";
+import { Review } from "./components/landing/mainReviews";
+import { Bento } from "./components/landing/mainBento";
+import { FirstLook } from "./components/landing/mainFirstLook";
+import { Features } from "./components/landing/mainFeatures";
+import { FAQ } from "./components/landing/mainFAQSection";
+import { RegistrationCall } from "./components/landing/callToRegistration";
 
 export default function Home() {
   return (

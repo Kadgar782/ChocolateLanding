@@ -165,7 +165,6 @@ export default function Home() {
   // check if item is already in the cart
   const productsInCart = useAppSelector(selectCartProducts);
   const cartArray = productsInCart.cart;
-  console.log(cartArray);
 
   return (
     <section className="wholePage flex min-h-screen w-full  justify-end bg-background">

@@ -8,17 +8,17 @@ import {
 } from "../../../lib/features/productsInCartSlice";
 import { CartUpdateParametrs } from "../../../lib/features/productsInCartSlice";
 import { CartItem } from "../../../lib/features/productsInCartSlice";
-type HandleCheckboxChange = (id: number) => void;
 
 export const ProductInCart: React.FC<{
   product: CartItem;
-  selectedItems: number[];
-}> = ({ product, selectedItems }) => {
+}> = ({ product }) => {
   const dispatch = useAppDispatch();
   const actionQuantity: CartUpdateParametrs = {
     id: product.id,
     quantityInCart: product.quantityInCart,
   };
+
+  //cart actions
   const handleRemoveFromCart = (id: number) => {
     dispatch(removeFromCart(id));
   };
