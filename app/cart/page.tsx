@@ -33,7 +33,7 @@ export default function Cart() {
 
   if (cartProductsList.length !== 0) {
     return (
-      <section className="wholePage flex min-h-screen w-full  justify-center bg-background">
+      <section className="wholePage flex min-h-screen w-full  justify-center bg-background pt-16 max-md:pb-16">
         <div className="flex w-[75%] flex-col pt-20 max-[1399px]:w-full  ">
           <h1 className=" border-b-2 border-text pb-3 text-lg text-text">
             My Cart

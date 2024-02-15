@@ -9,7 +9,7 @@ import { RegistrationCall } from "./components/landing/callToRegistration";
 export default function Home() {
   return (
     //The first section with an image of the product, a brief description of it and a purchase button
-    <main className=" flex min-h-screen w-full flex-col items-center justify-between bg-background ">
+    <main className=" flex min-h-screen w-full flex-col items-center justify-between bg-background pt-16 max-md:pb-16">
       <FirstLook />
       {/* The beginning of the second section with three blocks why is this product
       so great */}

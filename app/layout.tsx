@@ -27,17 +27,17 @@ export default async function RootLayout({
       <StoreProvider>
         <html lang="en">
           <body className={inter.className}>
-            <section className="flex h-16 flex-row content-center max-md:h-20 ">
-              <nav className="flex grow flex-row bg-accent text-text max-md:flex-col-reverse">
-                <div className="Logo w-1/3 max-md:w-1/5"></div>
+            <section className=" fixed z-10 flex  h-16 w-full flex-row content-center max-md:relative">
+              <nav className="  flex grow flex-row bg-accent text-text max-md:flex-col">
+                <div className="Logo w-1/3 max-md:w-0"></div>
                 {/* it will be necessary to add redux */}
-                <div className="searchBar flex min-h-[40px] w-1/3 content-center justify-center self-center rounded-lg border-2 border-text bg-primary max-md:mb-2 max-md:w-11/12">
+                <div className="searchBar flex min-h-[40px] w-1/3 content-center justify-center self-center rounded-lg border-2 border-text bg-primary max-md:mb-2 max-md:mt-2 max-md:w-11/12">
                   <input
                     placeholder="Search"
                     className="w-full rounded-lg border-text  bg-primary pl-2 text-text"
                   />
                 </div>
-                <div className=" button-group ml-14 flex  w-1/3 items-center justify-end max-md:justify-center max-md:self-center max-md:pb-2">
+                <div className=" button-group ml-14 flex  w-1/3 items-center justify-end bg-accent max-md:fixed max-md:bottom-0 max-md:left-0 max-md:ml-0 max-md:w-full  max-md:justify-center max-md:gap-2 max-md:self-center max-md:pb-2 max-md:pt-2">
                   <Link className="pr-8" href="/">
                     HOME
                   </Link>
@@ -49,17 +49,17 @@ export default async function RootLayout({
                       <CustomSignIn />
                     </div>
                   ) : (
-                    <div className=" flex flex-col items-center justify-center  pb-5 pr-8 pt-5">
+                    <div className="flex flex-col items-center justify-center   pr-8 pt-5 max-md:m-0 max-md:pr-6 max-md:pt-0 ">
                       <SignOutButton>
-                        <button className=" flex flex-col items-center justify-center text-sm">
+                        <button className=" flex flex-col items-center justify-center text-sm ">
                           <KeyRound /> log out
                         </button>
                       </SignOutButton>
                     </div>
                   )}
                   {!user ? null : (
-                    <Link className="pr-8" href="/cart">
-                      <div className=" relative mr-9 flex flex-col items-center justify-center  pb-5 pr-8 pt-5">
+                    <Link className="pr-8 max-md:pr-0" href="/cart">
+                      <div className=" relative mr-9 flex flex-col items-center justify-center pb-5  pr-8 pt-5 max-md:m-0 max-md:p-0 ">
                         <ItemsInCartCount />
                         <ShoppingCart className="  stroke-text" />
                         <p className="text-sm text-text">Cart</p>

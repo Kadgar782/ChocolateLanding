@@ -167,7 +167,7 @@ export default function Home() {
   const cartArray = productsInCart.cart;
 
   return (
-    <section className="wholePage flex min-h-screen w-full  justify-end bg-background">
+    <section className="wholePage flex min-h-screen w-full justify-end  bg-background pt-16 max-md:pb-16">
       <div className="flex w-4/5 max-[1399px]:w-full ">
         <aside className="filters mt-7 flex w-1/6 flex-col justify-start rounded-md  border-2 border-text  bg-primary p-5 pl-0 max-[1399px]:ml-10 max-lg:hidden">
           {/* categories to filter */}

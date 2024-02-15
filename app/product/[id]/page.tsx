@@ -96,7 +96,7 @@ export default function Page({ params }: { params: { id: number } }) {
       toast("Item added to Cart");
     };
     return (
-      <section className="wholePage wholePage flex min-h-screen w-full flex-wrap justify-center bg-background">
+      <section className="wholePage wholePage flex min-h-screen w-full flex-wrap justify-center bg-background pt-16 max-md:pb-16">
         <h1 className=" mt-10 flex h-10 w-[70%]  text-3xl text-text max-[1399px]:w-full ">
           {name}
         </h1>
@@ -246,6 +246,6 @@ export default function Page({ params }: { params: { id: number } }) {
       </section>
     );
   } else {
-    return <div> 404</div>;
+    return <div className="flex pt-16"> 404</div>;
   }
 }
