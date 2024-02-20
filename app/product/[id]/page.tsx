@@ -93,7 +93,6 @@ export default function Page({ params }: { params: { id: number } }) {
           },
         ]),
       );
-      toast("Item added to Cart");
     };
     return (
       <section className="wholePage wholePage flex min-h-screen w-full flex-wrap justify-center bg-background pt-16 max-md:pb-16">

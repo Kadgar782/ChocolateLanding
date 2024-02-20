@@ -114,6 +114,6 @@ export const {
 } = cartSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectCartProducts = (state: RootState) => state.productsInCart;
+export const selectCartProducts = (state: RootState) => state.cart;
 
 export default cartSlice.reducer;

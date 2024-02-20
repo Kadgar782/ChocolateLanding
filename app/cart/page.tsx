@@ -9,11 +9,8 @@ import {
 import { ProductInCart } from "@/components/cart/cartProduct";
 import { useAppSelector, useAppDispatch } from "../../lib/hooks";
 import { Trash2 } from "lucide-react";
-import { useState } from "react";
 
 export default function Cart() {
-  const [selectedItems, setSelectedItems] = useState<number[]>([]);
-
   const products = useAppSelector(selectCartProducts);
   const dispatch = useAppDispatch();
   const cartProductsList = products.cart;
@@ -24,8 +21,6 @@ export default function Cart() {
 
   const handleRemoveSelectedProducts = () => {
     dispatch(removeSelectedProducts());
-    // Clear selectedLabels after removal
-    setSelectedItems([]);
   };
   const handleSelectAllProducts = () => {
     dispatch(selectAllProductsInCart());
@@ -43,7 +38,7 @@ export default function Cart() {
               type="checkbox"
               className="mx-4  flex "
               checked={allIsSelectedTrue}
-              onClick={() => handleSelectAllProducts()}
+              onChange={() => handleSelectAllProducts()}
             />
             Select all
             <button
