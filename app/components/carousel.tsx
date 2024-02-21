@@ -9,10 +9,11 @@ import "./css/carousel.css";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export function ProductCarousel() {
   const [productsPerPage, setProductsPerPage] = useState<number>(5);
-
+  const baseAPI = process.env.NEXT_PUBLIC_BASE_API;
   const products = useSelector(selectProducts);
   useEffect(() => {
     //if a user visited the site from a phone, then he will have fewer products displayed per page, but there will be more pages
@@ -48,19 +49,26 @@ export function ProductCarousel() {
         >
           {products.products.map(({ image, name, id }, index) => (
             <SwiperSlide key={id}>
-              <section
-                className=" img-slider-card flex h-max flex-1 flex-col items-center rounded-md bg-primary  p-4 text-center "
+              <Link
                 key={id}
+                target="_blank"
+                href={`${baseAPI}product/${id}`}
+                className=" img-slider-card flex flex-col items-center "
               >
-                <img
+                <section
+                  className=" img-slider-card flex h-max flex-1 cursor-pointer flex-col items-center rounded-md bg-primary  p-4 text-center "
                   key={id}
-                  src={image}
-                  alt={name}
-                  // aria-hidden={page !== index}
-                  className="img-slider-img  flex h-auto max-h-[164px] max-w-full flex-shrink-0 flex-grow-0 hover:-translate-y-1 lg:max-h-[222px]"
-                />
-                <h1 className="img-slider-text text-text">{name}</h1>
-              </section>
+                >
+                  <img
+                    key={id}
+                    src={image}
+                    alt={name}
+                    // aria-hidden={page !== index}
+                    className="img-slider-img  flex h-auto max-h-[164px] max-w-full flex-shrink-0 flex-grow-0 hover:-translate-y-1 lg:max-h-[222px]"
+                  />
+                  <h1 className="img-slider-text text-text">{name}</h1>
+                </section>
+              </Link>
             </SwiperSlide>
           ))}
           <button className="swiper-button-next">

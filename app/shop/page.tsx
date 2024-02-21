@@ -43,7 +43,7 @@ export default function Home() {
 
   const products = useAppSelector(selectProducts);
   const productsList = products.products;
-  const baseApi = "http://localhost:3000/";
+  const baseApi = process.env.NEXT_PUBLIC_BASE_API;
 
   // the part with handlers for each type of product
   const handleTypeFilterChange = (

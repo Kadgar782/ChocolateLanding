@@ -17,7 +17,6 @@ export const FirstLook = () => {
         <div className=" flex flex-row  items-center ">
           <Link
             className="flex h-16 items-center justify-center rounded-md bg-secondary  px-2 pl-2 pr-4  text-center text-text"
-            target="_blank"
             href="/shop"
           >
             <strong>ORDER ONLINE</strong>

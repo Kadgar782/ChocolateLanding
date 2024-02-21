@@ -1,5 +1,7 @@
-import Link from "next/link";
+import { SignUpButton } from "@clerk/nextjs";
 export const RegistrationCall = () => {
+  const baseAPI = process.env.NEXT_PUBLIC_BASE_API;
+  const shopURL = `${baseAPI}shop`;
   return (
     <section className="m-20 flex min-h-[300px] w-2/4 flex-col items-center justify-center rounded bg-primary max-md:w-3/4">
       <h1 className="text-5xl text-text max-[1030px]:text-4xl max-md:pl-5">
@@ -12,13 +14,11 @@ export const RegistrationCall = () => {
         </span>
         &nbsp;discount on your first order!
       </h2>
-      <Link
-        className="flex h-16 items-center rounded-md bg-secondary  px-2 pl-2 pr-4  text-right text-text"
-        target="_blank"
-        href="/registration"
-      >
-        <strong>Registration</strong>
-      </Link>
+      <div className=" flex h-16 items-center rounded-md bg-secondary  px-2 pl-2 pr-4  text-right text-text">
+        <strong>
+          <SignUpButton mode="modal" redirectUrl={shopURL} />
+        </strong>
+      </div>
     </section>
   );
 };

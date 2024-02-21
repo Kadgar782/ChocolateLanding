@@ -11,22 +11,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import storage from "redux-persist/lib/storage";
-
-// const createNoopStorage = () => {
-//   return {
-//     getItem(_key: string) {
-//       return Promise.resolve(null);
-//     },
-//     setItem(_key: string, value: string) {
-//       return Promise.resolve(value);
-//     },
-//     removeItem(_key: string) {
-//       return Promise.resolve();
-//     },
-//   };
-// };
 
 const persistConfig = {
   key: "root",
@@ -39,12 +24,6 @@ const rootReducer = combineReducers({
   cart: cartReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-// const persistConfig = {
-//   key: "root",
-//   storage: storage,
-//   whitelist: ["productsInCart"],
-// };
 
 export const store = configureStore({
   reducer: persistedReducer,
