@@ -7,7 +7,7 @@ export const CustomSignIn = () => {
   const pathname = usePathname();
   return (
     <SignInButton mode="modal" afterSignInUrl={pathname}>
-      <button className=" flex flex-col items-center justify-center text-sm">
+      <button className=" flex flex-col items-center justify-center ">
         <KeyRound /> login
       </button>
     </SignInButton>

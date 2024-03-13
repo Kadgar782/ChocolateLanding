@@ -35,30 +35,31 @@ export const cartSlice = createSlice({
     addToCart: (state: CartRootState, action: PayloadAction<CartProducts>) => {
       state.cart.push(...action.payload);
     },
-    increaseQuantity(
-      state: CartRootState,
-      action: PayloadAction<CartUpdateParametrs>,
-    ) {
-      const { id, quantityInCart } = action.payload;
-      const increaseQuantity = quantityInCart < 10 ? quantityInCart + 1 : 10;
-      const itemToUpdate = state.cart.find((item) => item.id === id);
+    // Maybe I don't need them, but it's too early to decide.
+    // increaseQuantity(
+    //   state: CartRootState,
+    //   action: PayloadAction<CartUpdateParametrs>,
+    // ) {
+    //   const { id, quantityInCart } = action.payload;
+    //   const increaseQuantity = quantityInCart < 10 ? quantityInCart + 1 : 10;
+    //   const itemToUpdate = state.cart.find((item) => item.id === id);
 
-      if (itemToUpdate) {
-        itemToUpdate.quantityInCart = increaseQuantity;
-      }
-    },
-    decreaseQuantity(
-      state: CartRootState,
-      action: PayloadAction<CartUpdateParametrs>,
-    ) {
-      const { id, quantityInCart } = action.payload;
-      const decreaseQuantity = quantityInCart > 1 ? quantityInCart - 1 : 1;
-      const itemToUpdate = state.cart.find((item) => item.id === id);
+    //   if (itemToUpdate) {
+    //     itemToUpdate.quantityInCart = increaseQuantity;
+    //   }
+    // },
+    // decreaseQuantity(
+    //   state: CartRootState,
+    //   action: PayloadAction<CartUpdateParametrs>,
+    // ) {
+    //   const { id, quantityInCart } = action.payload;
+    //   const decreaseQuantity = quantityInCart > 1 ? quantityInCart - 1 : 1;
+    //   const itemToUpdate = state.cart.find((item) => item.id === id);
 
-      if (itemToUpdate) {
-        itemToUpdate.quantityInCart = decreaseQuantity;
-      }
-    },
+    //   if (itemToUpdate) {
+    //     itemToUpdate.quantityInCart = decreaseQuantity;
+    //   }
+    // },
     updateQuantity(
       state: CartRootState,
       action: PayloadAction<CartUpdateParametrs>,
@@ -106,8 +107,8 @@ export const {
   addToCart,
   updateQuantity,
   removeFromCart,
-  decreaseQuantity,
-  increaseQuantity,
+  // decreaseQuantity,
+  // increaseQuantity,
   removeSelectedProducts,
   selectProductInCart,
   selectAllProductsInCart,

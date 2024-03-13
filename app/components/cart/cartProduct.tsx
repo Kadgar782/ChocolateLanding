@@ -1,32 +1,45 @@
 import { Trash2, Minus, Plus } from "lucide-react";
 import { useAppDispatch } from "../../../lib/hooks";
 import {
-  increaseQuantity,
   removeFromCart,
-  decreaseQuantity,
   selectProductInCart,
+  updateQuantity,
 } from "../../../lib/features/productsInCartSlice";
-import { CartUpdateParametrs } from "../../../lib/features/productsInCartSlice";
 import { CartItem } from "../../../lib/features/productsInCartSlice";
+import { ChangeEvent, useState } from "react";
 
 export const ProductInCart: React.FC<{
   product: CartItem;
 }> = ({ product }) => {
+  const [productQuantity, setProductQuantity] = useState<number>(
+    product.quantityInCart,
+  );
   const dispatch = useAppDispatch();
-  const actionQuantity: CartUpdateParametrs = {
-    id: product.id,
-    quantityInCart: product.quantityInCart,
-  };
 
   //cart actions
+  const handleUpdateInCart = (e: ChangeEvent<HTMLInputElement>) => {
+    const newQuantity = parseInt(e.target.value, 10);
+    if (!isNaN(newQuantity) && newQuantity >= 1 && newQuantity <= 10) {
+      setProductQuantity(newQuantity);
+      dispatch(updateQuantity({ id: product.id, quantityInCart: newQuantity })); // Dispatch update action to Redux store
+    }
+  };
   const handleRemoveFromCart = (id: number) => {
     dispatch(removeFromCart(id));
   };
   const handleIncrease = () => {
-    dispatch(increaseQuantity(actionQuantity));
+    const newQuantity = productQuantity + 1;
+    if (newQuantity <= 10) {
+      setProductQuantity(newQuantity);
+      dispatch(updateQuantity({ id: product.id, quantityInCart: newQuantity }));
+    }
   };
   const handleDecrease = () => {
-    dispatch(decreaseQuantity(actionQuantity));
+    const newQuantity = productQuantity - 1;
+    if (newQuantity >= 1) {
+      setProductQuantity(newQuantity);
+      dispatch(updateQuantity({ id: product.id, quantityInCart: newQuantity }));
+    }
   };
   const handleSelect = () => {
     dispatch(selectProductInCart(product.id));
@@ -64,9 +77,11 @@ export const ProductInCart: React.FC<{
         <input
           className=" mx-4 flex w-11 items-center rounded-md border-2 border-text bg-background text-center"
           type="number"
+          inputMode="numeric"
           min="1"
           max="10"
-          value={product.quantityInCart}
+          value={productQuantity}
+          onChange={(e) => handleUpdateInCart(e)}
         />
         <Plus
           className="w-{32px} h-{32px} flex cursor-pointer "

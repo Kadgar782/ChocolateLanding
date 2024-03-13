@@ -4,7 +4,7 @@ import Image from "next/image";
 export const FirstLook = () => {
   return (
     <section className="flex flex-row  bg-[url('/img/beansReal.png')] bg-15% bg-right-top bg-no-repeat p-24 max-[1300px]:pr-0 max-lg:p-16 max-md:flex-col max-md:bg-none max-md:p-0">
-      <div className="self-up relative flex flex-col  pl-56 pr-40 pt-20 max-[1300px]:pl-5 max-xl:pr-0 max-lg:pl-10 max-lg:pr-0 max-md:p-9">
+      <div className="self-up relative flex flex-col  pl-56 pr-40 pt-20 max-[1300px]:pl-5 max-xl:pr-0 max-lg:pl-10 max-lg:pr-0 max-md:p-7">
         <h1 className="pb-8  text-5xl text-text ">
           <strong>Sweet Gastronomic Journey to the Center of Asia</strong>
         </h1>
