@@ -158,9 +158,9 @@ export default function Page({ params }: { params: { id: number } }) {
                 ))}
               </Swiper>
             </div>
-            <div className="big-image  ml-1 flex h-full w-4/5 place-content-center max-md:h-4/5 max-md:w-full  max-md:self-center  ">
+            <div className="big-image ml-1 flex h-full min-h-[386px] w-4/5 place-content-center max-md:h-4/5 max-md:w-full  max-md:self-center  ">
               <img
-                className="flex h-[96%] w-auto justify-center self-center rounded-lg"
+                className="flex h-[96%] w-auto shrink-0 justify-center self-center rounded-lg"
                 width={500}
                 height={500}
                 src={selectedImage !== "" ? selectedImage : image}

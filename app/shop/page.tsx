@@ -252,7 +252,7 @@ export default function Home() {
             {sortedProducts.map((item) => (
               <div
                 key={item.id}
-                className=" max-h-auto m-7 flex w-1/4 flex-col items-center  rounded-md border-t-2 border-text  bg-primary p-4 text-center  max-[660px]:w-1/3"
+                className=" max-h-auto m-7 flex w-1/4 flex-col items-center rounded-md border-t-2 border-text  bg-primary p-4 text-center  max-[660px]:w-1/3"
               >
                 <Link
                   key={item.id}
@@ -270,7 +270,9 @@ export default function Home() {
                   <h1 className="img-slider-text text-text">
                     {item.totalSold} sold
                   </h1>
-                  <h2 className="img-slider-text text-text">{item.name}</h2>
+                  <h2 className="img-slider-text  line-clamp-1 max-h-6 text-text">
+                    {item.name}
+                  </h2>
                 </Link>
                 {!isLoaded || !isSignedIn ? null : (
                   <button

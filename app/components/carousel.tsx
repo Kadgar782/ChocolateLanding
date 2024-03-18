@@ -26,12 +26,6 @@ export function ProductCarousel() {
       aria-label="Product Slider"
       className="flex  w-3/4   flex-wrap items-center justify-center max-md:h-full "
     >
-      {/* <a
-        href="#after-image-slider-controls"
-        className="skip-link invisible select-text focus-visible:visible"
-      >
-        Skip Image Slider Controls
-      </a> */}
       <div className="flex  h-max w-3/4 gap-5 overflow-hidden max-md:mb-4 max-md:h-5/6 max-md:w-full max-md:items-center">
         <Swiper
           slidesPerView={productsPerPage}
@@ -56,17 +50,18 @@ export function ProductCarousel() {
                 className=" img-slider-card flex flex-col items-center "
               >
                 <section
-                  className=" img-slider-card flex h-max flex-1 cursor-pointer flex-col items-center rounded-md bg-primary  p-4 text-center "
+                  className=" img-slider-card flex h-max min-w-[150px] max-w-[150px] flex-1 cursor-pointer flex-col items-center rounded-md bg-primary  p-4 text-center max-md:min-w-[70px] "
                   key={id}
                 >
                   <img
                     key={id}
                     src={image}
                     alt={name}
-                    // aria-hidden={page !== index}
                     className="img-slider-img  flex h-auto max-h-[164px] max-w-full flex-shrink-0 flex-grow-0 hover:-translate-y-1 lg:max-h-[222px]"
                   />
-                  <h1 className="img-slider-text text-text">{name}</h1>
+                  <h1 className="img-slider-text line-clamp-1 text-text">
+                    {name}
+                  </h1>
                 </section>
               </Link>
             </SwiperSlide>

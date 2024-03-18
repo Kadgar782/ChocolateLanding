@@ -29,7 +29,7 @@ export default async function RootLayout({
         <ClerkProvider>
           <StoreProvider>
             <CustomPersistGate>
-              <section className=" fixed z-10 flex  h-16 w-full flex-row content-center max-md:relative">
+              <section className=" fixed z-30 flex  h-16 w-full flex-row content-center max-md:relative">
                 <nav className="  flex grow flex-row items-center  bg-accent text-text max-md:flex-col">
                   <div className="Logo flex w-1/3 items-center justify-start  pl-7 pt-0 max-md:hidden">
                     <Link
@@ -82,7 +82,12 @@ export default async function RootLayout({
                       className="w-full rounded-lg border-text  bg-primary pl-2 text-text"
                     />
                   </div>
-                  <div className=" button-group ml-14 flex w-1/3 items-center justify-center gap-8 bg-accent text-xl max-md:fixed max-md:bottom-0 max-md:left-0 max-md:ml-0 max-md:w-full  max-md:justify-center max-md:gap-2 max-md:self-center max-md:pb-2 max-md:pt-2">
+                  <div
+                    className="
+                    button-group ml-14 flex w-1/3 items-center justify-center gap-8 bg-accent text-xl 
+                    max-[1070px]:ml-3  max-[1070px]:gap-4 
+                    max-md:fixed max-md:bottom-0 max-md:left-0 max-md:ml-0  max-md:w-full max-md:justify-center max-md:gap-4 max-md:self-center max-md:pb-2 max-md:pt-2"
+                  >
                     <Link className="hidden pr-2 max-md:flex" href="/">
                       <div className=" relative flex flex-col items-center justify-center  pr-8  max-md:m-0 max-md:p-0 ">
                         <Home />
@@ -110,8 +115,8 @@ export default async function RootLayout({
                       </div>
                     )}
                     {!user ? null : (
-                      <Link className="pr-8 max-md:pr-0" href="/cart">
-                        <div className=" relative mr-9 flex flex-col items-center justify-center  pr-8  max-md:m-0 max-md:p-0 ">
+                      <Link className="pr-8 max-[1070px]:pr-0" href="/cart">
+                        <div className=" relative mr-9 flex flex-col items-center justify-center  pr-8  max-[1070px]:pr-0 max-md:m-0 max-md:p-0">
                           <ItemsInCartCount />
                           <ShoppingCart className="  stroke-text" />
                           <p className=" text-text">Cart</p>
