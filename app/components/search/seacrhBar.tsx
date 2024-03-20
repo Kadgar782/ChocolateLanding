@@ -42,10 +42,7 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
-    filterProducts();
-
-    console.log(showResults);
-    console.log(filteredProducts); // Perform initial filtering on component mount
+    filterProducts(); // Perform initial filtering on component mount
   }, [searchTerm]); // Re-filter whenever searchTerm changes
 
   return (
@@ -67,7 +64,11 @@ const SearchBar = () => {
       >
         {filteredProducts.length !== 0 ? (
           filteredProducts.map((product) => (
-            <Link className="flex w-full" href={`/product/${product.id}`}>
+            <Link
+              key={product.id}
+              className="flex w-full"
+              href={`/product/${product.id}`}
+            >
               <li className="flex w-full" key={product.id}>
                 {product.name}
               </li>
