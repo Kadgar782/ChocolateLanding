@@ -1,5 +1,5 @@
 import { ChangeEventHandler, SetStateAction, useState } from "react";
-import { SingleProduct } from "../../lib/features/productsSlice";
+import { SingleProduct } from "../../../lib/features/productsSlice";
 import { ListOfParametrs } from "./shopFilterList";
 import { propsFilters } from "@/shop/page";
 

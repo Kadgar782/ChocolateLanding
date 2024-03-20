@@ -9,7 +9,7 @@ import {
 } from "../../lib/features/productsSlice";
 import { ArrowDownUp, SlidersHorizontal } from "lucide-react";
 import { Dispatch, ChangeEventHandler } from "react";
-import { FilterShop } from "@/components/shopFilter";
+import { FilterShop } from "@/components/search/shopFilter";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { toast } from "react-toastify";

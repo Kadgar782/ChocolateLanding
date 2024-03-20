@@ -8,7 +8,7 @@ import StoreProvider from "./storeProvider";
 import { CustomSignIn } from "./components/authentication/customSignIn";
 import { Home, KeyRound, ShoppingCart, Store } from "lucide-react";
 import CustomPersistGate from "./persistedStoreProvider";
-import Image from "next/image";
+import SearchBar from "./components/search/seacrhBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -76,12 +76,7 @@ export default async function RootLayout({
                     </Link>
                   </div>
                   {/* it will be necessary to add redux */}
-                  <div className="searchBar flex min-h-[40px] w-1/3 content-center justify-center self-center rounded-lg border-2 border-text bg-primary max-md:mb-2 max-md:mt-2 max-md:w-11/12">
-                    <input
-                      placeholder="Search"
-                      className="w-full rounded-lg border-text  bg-primary pl-2 text-text"
-                    />
-                  </div>
+                  <SearchBar />
                   <div
                     className="
                     button-group ml-14 flex w-1/3 items-center justify-center gap-8 bg-accent text-xl 
