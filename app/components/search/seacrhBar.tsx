@@ -60,15 +60,19 @@ const SearchBar = () => {
       <ul
         className={`search-results ${
           showResults ? "flex" : "hidden"
-        } absolute top-full   max-h-64  w-full list-none flex-col overflow-y-auto rounded-lg border-2 border-text bg-background p-2`}
+        } absolute top-full   max-h-64  w-full list-none flex-col overflow-y-auto rounded-lg border-2 border-text bg-background py-2`}
       >
         {filteredProducts.length !== 0 ? (
           filteredProducts.map((product) => (
             <Link
               key={product.id}
-              className="flex w-full"
+              className=" flex w-full border-b-2 border-text p-2"
               href={`/product/${product.id}`}
             >
+              <div className="flex h-16 w-16 justify-center">
+                <img src={product.image} className="  "></img>
+              </div>
+
               <li className="flex w-full" key={product.id}>
                 {product.name}
               </li>
