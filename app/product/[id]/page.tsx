@@ -91,7 +91,7 @@ export default function Page({ params }: { params: { id: number } }) {
     // check if item is already in the cart
 
     const cartArray = productsInCart.cart;
-    const currentProductInCart = cartArray.some((item) => item.id);
+    const currentProductInCart = cartArray.some((item) => item.id === id);
 
     const handleTabClick = (newTab: string) => {
       // Set the selected image index when an image is clicked
